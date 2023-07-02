@@ -8,7 +8,7 @@ from django.contrib.postgres.search import SearchVector,\
         SearchQuery, SearchRank
 
 from .models import Tweet, Mention
-from .forms import TweetForm, MentionForm
+from .forms import TweetForm, MentionForm, retweetForm
 from common.decorators import ajax_required
 from actions.utils import create_action
 
@@ -63,20 +63,46 @@ def create_mention(request, tweet_id):
         'status': 'bad'
     })
 
+@ajax_required
+@login_required
+def create_retweet(request, tweet_id):
+    form = retweetForm(request.POST)
+    if form.is_valid():
+        author = get_user_model().objects.get(username=request.user.username)
+        tweet = Tweet.objects.get(id=tweet_id)
+        user = tweet.author
+        instance = form.save(commit=False)
+        instance.author = author
+        instance.tweet = tweet
+        instance.save()
+
+        create_action(request.user, instance.retweet, tweet)
+        return JsonResponse({
+            'status': 'ok'
+        })
+    return JsonResponse({
+        'status': 'bad'
+    })
+
 
 
 @login_required
 def tweet_detail(request, pk):
     original_tweet = get_object_or_404(Tweet, id=pk)
     mentions = original_tweet.mentions.all()
+    retweet = original_tweet.retweet.all() 
     mentions = mentions.select_related('author', 'author__profile')\
+            .prefetch_related('users_like')
+    retweet = retweet.select_related('author', 'author__profile')\
             .prefetch_related('users_like')
     context = {'form': TweetForm(),
                'mention_form': MentionForm(),
+               'retweet_form': retweetForm(),
                'original_tweet': original_tweet,
                'original_tweet_author': original_tweet.author,
                'original_tweet_author_profile': original_tweet.author.profile,
                'mentions': mentions,
+               'retweet': retweet,
               }
     # original_tweet = original_tweet.select_related('author', 'author__profile')
 

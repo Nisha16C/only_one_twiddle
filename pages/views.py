@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 from tweets.forms import TweetForm
-from tweets.models import Tweet, Mention
+from tweets.models import Tweet, Mention, retweet
 
 
 class HomeRedirectView(RedirectView):
@@ -24,7 +24,7 @@ def homepage(request):
     user_tweets = Tweet.objects.filter(author_id=request.user.id)
     all_tweets = following_tweets | user_tweets
     all_tweets = all_tweets.select_related('author', 'author__profile',)\
-            .prefetch_related('mentions', 'users_like')
+            .prefetch_related('mentions','retweet', 'users_like')
 
     context = {
         'form': form,

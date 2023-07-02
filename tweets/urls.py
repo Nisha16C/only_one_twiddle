@@ -8,5 +8,6 @@ urlpatterns = [
     path('like-unlike/', views.like_unlike, name="like-unlike"),
     path('<int:pk>/', views.tweet_detail, name="tweet_detail"),
     path('<int:tweet_id>/mention/', views.create_mention, name="create_mention"),
+    path('<int:tweet_id>/retweet/', views.create_retweet, name="create_retweet"),
     path('search/', views.search, name="search"),
 ]

@@ -9,6 +9,11 @@ const mention = document.getElementById('id_mention');
 const mentionForm = document.getElementById('mention-form');
 const submitMentionBtn = document.getElementById('mention-submit');
 // -----------------------------------------------------------------
+const retweetBtn = document.getElementById('retweet-button');
+const retweet = document.getElementById('id_retweet');
+const retweetForm = document.getElementById('retweet-form');
+const submitretweetBtn = document.getElementById('retweet-submit');
+//-------------------------------------------------------------------
 const deleteBtn = document.getElementById('delete-button');
 
 if (mentionForm !== null) {
@@ -40,6 +45,35 @@ if (mentionForm !== null) {
     })
 }
 // ----------------------------------------------------------------
+if (retweetForm !== null) {
+    const tweetURL = retweetForm.getAttribute('data-tweet');
+    // For retweet
+    retweetBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        toggleModal('retweet-modal');
+    })
+
+    submitretweetBtn.addEventListener('click', function (e) {
+        e.preventDefault;
+
+        $.ajax({
+            type: 'POST',
+            url: `/compose/${tweetURL}/retweet/`,
+            data: {
+                'csrfmiddlewaretoken': csrf_token[0].value,
+                'retweet': retweet.value,
+            },
+            success: function (response) {
+                toggleModal('retweet-modal');
+                tweetForm.reset();
+            },
+            error: function (error) {
+                alert("Oops something went wrong!");
+            }
+        })
+    })
+}
+//-----------------------------------------------------------------
 let likeUnlikeForms = document.getElementsByClassName('like-unlike');
 likeUnlikeForms = Array.from(likeUnlikeForms);
 

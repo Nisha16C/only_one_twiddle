@@ -80,6 +80,42 @@
                   </div>
                 </div>
               {% endfor %}
+              <!--Retweet-->
+              {% for retweet_notification in retweet_notifications %}
+                <div class="bg-dim-700 flex items-center justify-center px-2 py-2">
+                  <div class="w-full mx-auto rounded-lg bg-dim-700 shadow p-5 text-white">
+                    <div class="w-full mb-4 bg-indigo-600 rounded-lg">
+                      <p class="p-4 text-base leading-6 font-medium text-white">
+                      @{{ retweet_notification.user.username }} retweet to your 
+                      <span class="text-xs font-semibold inline-block py-1 px-1 uppercase rounded text-purple-600 bg-purple-200 uppercase last:mr-0 mr-1">
+                        <a href="{% url " tweet_detail " retweet_notification.target_id %}">
+                          retweet
+                        </a>
+                      </span>
+                      with:
+                      </p>
+                    </div>
+                    
+                    <div class="w-full flex mb-4">
+                      <div class="overflow-hidden rounded-full w-10 h-10">
+                        <img src="{{ retweet_notification.user.profile.avatar.url }}"/>
+                      </div>
+                      <div class="flex-grow pl-3">
+                        <h6 class="font-bold text-md">{{ retweet_notification.user.first_name|default:retweet_notification.user.username }}</h6>
+                        <p class="text-xs text-white">@{{ retweet_notification.user.username }}</p>
+                      </div>
+                      <div class="text-right">
+                        <p>{{ retweet_notification.created|timesince }} ago</p>
+                      </div>
+                    </div>
+                    <div class="w-full mb-4">
+                      <p class="text-sm">
+                      {{ retweet_notification.verb }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
               <!-- LIKE TWEET -->
               {% for like_tweet_notification in like_tweet_notifications %}
                 <div class="bg-dim-700 flex items-center justify-center px-2 py-2">
