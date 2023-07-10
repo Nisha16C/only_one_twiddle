@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+# from chat.views import user_list, send_message
 
 import debug_toolbar
 
@@ -25,6 +26,10 @@ urlpatterns = [
 
     # Tweet stuff
     path('compose/', include('tweets.urls')),
+
+    # # Chat app
+    path('chat/', include("chat.urls"))
+    
 
 ]
 

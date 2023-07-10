@@ -48,7 +48,7 @@ def notifications(request):
         .select_related('user', 'user__profile')
     # like retweet
     target_ct_retweet = ContentType.objects.get_for_model(retweet)
-    retweet_ids = request.user.mentions.values_list('id', flat=True)
+    retweet_ids = request.user.retweet.values_list('id', flat=True)
     like_retweet_notifications = Action.objects.filter(target_ct=target_ct_retweet,
                                                        target_id__in=retweet_ids,
                                                        verb='like retweet')\

@@ -21,7 +21,7 @@ SECRET_KEY = env.str("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DEBUG", default=False)
 
-ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1', '10.0.1.13']
+ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1', '10.0.1.13', '10.0.1.129']
 
 
 # Application definition
@@ -61,6 +61,11 @@ INSTALLED_APPS = [
 
     # For tweet functionality
     'tweets.apps.TweetsConfig',
+
+    # # For Chat
+    # 'mychatapp.apps.MychatappConfig'
+    'chat',
+
 ]
 
 MIDDLEWARE = [
@@ -103,9 +108,9 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    "default": env.dj_db_url("DATABASE_URL")
-}
+# DATABASES = {
+#     "default": env.dj_db_url("DATABASE_URL")
+# }
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
@@ -116,12 +121,12 @@ DATABASES = {
 #         'PORT': '5432',
 #     }
 # }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

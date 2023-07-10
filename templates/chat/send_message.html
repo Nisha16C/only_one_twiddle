@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div style="padding-left: 12px; padding-right: 12px;" >
+        <h2 >Conversation</h2>
+        {% if receiver %}
+            <h3 >{{ receiver.username }}</h3>
+            <div style=" border: 1px; border-style: initial;">
+                {% for message in messages %}
+                    {% if message.sender == request.user %}
+                        <div style="text-align: right; padding-right: 120px;">
+                           <p>{{ message.content }}</p> 
+                        </div>
+                        
+                    {% else %}
+                        <div style="text-align: left; padding-left: 12px;">
+                            <p>{{ message.content }}</p>
+                        </div>
+                        
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <form method="post" action="{% url 'send_message' receiver.id %}">
+                {% csrf_token %}
+                <textarea style="background-color: rgb(194, 192, 190); border: 2px solid black; padding: 5px; width: 100%; margin-top: 10px;" name="content" placeholder="Type your message here"></textarea>
+                <input type="submit" value="Send" style="margin-top: 10px; padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer;">
+            </form>
+        {% else %}
+            <p>Select a user to start a conversation.</p>
+        {% endif %}
+    </div>
+{% endblock %}
