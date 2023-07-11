@@ -5,6 +5,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    height: 100%;
   }
   
   .container {
@@ -67,7 +68,7 @@ body {
   }
   
   .message-list .receiver {
-    background-color: #e2e2e2;
+    background-color: #929090;
     text-align: left;
   }
   

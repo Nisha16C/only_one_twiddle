@@ -1,29 +1,31 @@
-{% extends 'base.html' %}
 
 {% block content %}
-    <div style="padding-left: 12px; padding-right: 12px;" >
-        <h2 >Conversation</h2>
+    <div style="padding-left: 12px; padding-right: 12px; background-color: #15202b; font-family: 'Courier New', Courier, monospace;" >
+        <!-- <h2 style="padding-top: 5px; font-size: 25px; color: white;"><b>Conversation</b></h2> -->
         {% if receiver %}
-            <h3 >{{ receiver.username }}</h3>
-            <div style=" border: 1px; border-style: initial;">
+            <h3 style="padding-bottom: 25px; padding-top: 25px; font-size: 20px; color: #60a5fa; text-align: center; font-family: 'Courier New', Courier, monospace; background-color: rgb(36, 36, 36);"><b>{{ receiver.username }}</b></h3>
+            <div style=" border: 1px; border-style: initial; height: calc(100% - 150px); overflow-y: scroll; ">
                 {% for message in messages %}
                     {% if message.sender == request.user %}
-                        <div style="text-align: right; padding-right: 120px;">
+                        <div style="text-align: right; padding-right: 120px; font-size: 20px; color: white; " >
                            <p>{{ message.content }}</p> 
                         </div>
                         
                     {% else %}
-                        <div style="text-align: left; padding-left: 12px;">
+                        <div style="text-align: left; padding-left: 12px; font-size: 20px; color: white;">
                             <p>{{ message.content }}</p>
                         </div>
                         
                     {% endif %}
                 {% endfor %}
             </div>
-            <form method="post" action="{% url 'send_message' receiver.id %}">
-                {% csrf_token %}
-                <textarea style="background-color: rgb(194, 192, 190); border: 2px solid black; padding: 5px; width: 100%; margin-top: 10px;" name="content" placeholder="Type your message here"></textarea>
-                <input type="submit" value="Send" style="margin-top: 10px; padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer;">
+            <form method="post" action="{% url 'send_message' receiver.id %}" style="position: sticky; bottom: 0; padding: 10px;">
+                <div style="display: flex; position:relative;">
+                    {% csrf_token %}
+                    <textarea style=" flex: 1; background-color: rgb(115, 193, 235);  margin-bottom: 10px; margin-right: 20%; border: 2px solid black; border-radius: 25px; padding: 5px; width: 100%; margin-top: 10px; color: rgb(34, 33, 33); font-size: 18px; " name="content" placeholder="Type your message here"></textarea>
+                    <input type="submit" value="Send" style="  padding: 20px; margin-bottom: 10px;  background-color: #60a5fa; color: white; border: none; border-radius: 30px; cursor: pointer;">
+                </div>
+                
             </form>
         {% else %}
             <p>Select a user to start a conversation.</p>

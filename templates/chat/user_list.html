@@ -1,30 +1,16 @@
-{% extends 'base.html' %}
-
 {% block content %}
-    <div style="display: flex;">
-        <div style="flex: 1;">
-            <h2>User List</h2>
-            <ul>
+    <div style="text-align: center; background-color: #15202b; font-family: 'Courier New', Courier, monospace;">
+        <div style="padding: 10px 550px;">
+            <h2 style="padding: 20px 10px; font-size: 20px ; color: #f9f7f7;"><b>Select a user to start a conversation.</b></h2>
+            <ul style="list-style-type: none; padding: 0;">
                 {% for user in users %}
-                    <li><a href="{% url 'send_message' user.id %}">{{ user.username }}</a></li>
+                    <li style="margin-bottom: 15px;">
+                        <a href="{% url 'send_message' user.id %}" style="display: block; font-size: 18px; padding: 10px; background-color: #60a5fa; border: 1px solid #ccc; border-radius: 50px; text-decoration: none; color: #f9f7f7;">
+                            {{ user.username }}
+                        </a>
+                    </li>
                 {% endfor %}
             </ul>
-        </div>
-        <div style="flex: 2;">
-            <h2>Conversation</h2>
-            {% if receiver %}
-                <h3>{{ receiver.username }}</h3>
-                {% for message in messages %}
-                    <p>{{ message.sender.username }}: {{ message.content }}</p>
-                {% endfor %}
-                <form method="post" action="{% url 'send_message' receiver.id %}">
-                    {% csrf_token %}
-                    <input type="text" name="content">
-                    <input type="submit" value="Send">
-                </form>
-            {% else %}
-                <p>Select a user to start a conversation.</p>
-            {% endif %}
         </div>
     </div>
 {% endblock %}

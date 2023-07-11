@@ -11,6 +11,7 @@ from .models import Tweet, Mention
 from .forms import TweetForm, MentionForm, retweetForm
 from common.decorators import ajax_required
 from actions.utils import create_action
+from django.db.models import Count
 
 @ajax_required
 @require_POST
@@ -62,6 +63,13 @@ def create_mention(request, tweet_id):
     return JsonResponse({
         'status': 'bad'
     })
+
+# @ajax_required
+# @login_required
+
+
+
+
 
 @ajax_required
 @login_required
