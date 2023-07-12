@@ -64,10 +64,6 @@ def create_mention(request, tweet_id):
         'status': 'bad'
     })
 
-# @ajax_required
-# @login_required
-
-
 
 
 
