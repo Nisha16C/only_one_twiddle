@@ -15,19 +15,27 @@
                 {% for message in messages %}
                     {% if message.sender == request.user %}
                         <div style="text-align: right; margin-bottom: 1px;">
-                            <p style="padding: 10px; border-radius: 20px; display: inline-block; max-width: 70%; background-color: #2b3e51; color: white; font-size: 18px;">{{ message.content }}</p>
+                            <p style="padding: 10px; border-radius: 20px; display: inline-block; max-width: 70%; background-color: #2b3e51; color: white; font-size: 18px;">
+                                {{ message.content }} 
+                            </p>
+                            <span style="font-size: 12px; color: gray; display: block; margin-top: -18px; text-align: right; padding: 2px; ">
+                                {{ message.timestamp }}</span>
                         </div>
                     {% else %}
                         <div style="text-align: left; margin-bottom: 10px;">
-                            <p style="padding: 10px; border-radius: 20px; display: inline-block; max-width: 70%; background-color: #60a5fa; color: white; font-size: 18px;">{{ message.content }}</p>
+                            <p style="padding: 10px; border-radius: 20px; display: inline-block; max-width: 70%; background-color: #60a5fa; color: white; font-size: 18px;">
+                                {{ message.content }}
+                            </p>
+                            <span style="font-size: 12px; color: gray; display: block; margin-top: -18px; text-align: left; padding: 2px; ">
+                                {{ message.timestamp }}</span>
                         </div>
-                    {% endif %}
+                        {% endif %}
                 {% endfor %}
             </div>
             <form method="post" action="{% url 'send_message' receiver.id %}" style="position: sticky; bottom: 0; padding: 12px;">
                 <div style="display: flex;">
                     {% csrf_token %}
-                    <textarea style="flex: 1; background-color: rgb(115, 193, 235); ; margin-right: 10px; border: 2px solid black; border-radius: 25px; padding: 10px; color: rgb(34, 33, 33); font-size: 18px;" name="content" placeholder="Type your message here" required></textarea>
+                    <textarea style="flex: 1; margin-right: 10px; border: 3px solid #60a5fa; border-radius: 25px; padding: 10px; color: rgb(34, 33, 33); font-size: 18px;" name="content" placeholder="Type your message here" required></textarea>
                     <input type="submit" value="Send" style="padding: 10px 20px; background-color: #60a5fa; color: white; border: none; border-radius: 30px; cursor: pointer;">
                 </div>
             </form>

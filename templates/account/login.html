@@ -1,6 +1,6 @@
 {% extends "account/base.html" %}
 {% load widget_tweaks %}
-
+{% load socialaccount %}
 {% block head_title %}Sign in{% endblock %}
 
 {% block navbar %}{% endblock navbar %}
@@ -71,6 +71,7 @@
             <a href="{% url 'account_reset_password' %}" class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">
               Forgot your password?
             </a>
+            <a href="{% provider_login_url 'google' %}">Login With Google</a>
           </div>
         </div>
 
