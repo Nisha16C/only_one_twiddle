@@ -1,3 +1,4 @@
+{% load static %}
 {% block content %}
     <div style="text-align: center; background-color: #15202b; font-family: 'Courier New', Courier, monospace; height: 100vh; display: flex; justify-content: center;">
         <a href="{% url 'home' %}" style="position: absolute; top: 10; left: 10; text-decoration: none; font-size: 20px; margin-top: 20px; margin-left: 20px; background-color: #60a5fa; border-radius: 30px; display: flex; align-items: center; color: white; padding: 10px;">
@@ -12,6 +13,7 @@
                 {% for user in users %}
                     <li style="margin-bottom: 15px;">
                         <a href="{% url 'send_message' user.id %}" style="display: block; font-size: 18px; padding: 10px; background-color: #60a5fa; border: 1px solid #ccc; border-radius: 50px; text-decoration: none; color: #f9f7f7;">
+                            <!-- <img src="{{ user.avatar.url }}" alt="{{ user.username }}" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 10px;"> -->
                             {{ user.username }}
                         </a>
                     </li>

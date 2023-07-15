@@ -3,6 +3,7 @@ const submitTweetBtn = document.getElementById('tweet-submit');
 const tweetForm = document.getElementById('tweet-form');
 const csrf_token = document.getElementsByName('csrfmiddlewaretoken');
 const body = document.getElementById('id_body')
+const pictureInput = document.getElementById('id_picture');                                                                                        
 // ----------------------------------------------------------------
 const mentionBtn = document.getElementById('mention-button');
 const mention = document.getElementById('id_mention');
@@ -46,7 +47,7 @@ if (mentionForm !== null) {
 }
 // ----------------------------------------------------------------
 if (retweetForm !== null) {
-    const tweetURL = retweetForm.getAttribute('data-tweet');
+    const tweetURL = mentionForm.getAttribute('data-tweet');
     // For mention
     retweetBtn.addEventListener('click', function (e) {
         e.preventDefault();
@@ -109,6 +110,7 @@ submitTweetBtn.addEventListener('click', function (e) {
         data: {
             'csrfmiddlewaretoken': csrf_token[0].value,
             'body': body.value,
+            'pictureInput': pictureInput.value,
         },
         success: function (response) {
             toggleModal('modal-id');
