@@ -65,7 +65,8 @@ def send_message(request, user_id):
 
     if request.method == 'POST':
         content = request.POST['content']
-        message = Message.objects.create(sender=sender, receiver=receiver, content=content)
+        image =  request.FILES.get('image')
+        message = Message.objects.create(sender=sender, receiver=receiver, content=content, image=image)
         chat.messages.add(message)
         chat.save()
         return redirect('send_message', user_id=user_id)

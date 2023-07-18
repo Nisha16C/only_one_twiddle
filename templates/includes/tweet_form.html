@@ -15,7 +15,7 @@
       </div>
       <!--body-->
       <div class="relative p-6 flex-auto">
-        <form method="POST" id="tweet-form">
+        <form method="POST" id="tweet-form" enctype="multipart/form-data">
         {% csrf_token %}
         {% include "base_form.html" with form=form %}
         </form>

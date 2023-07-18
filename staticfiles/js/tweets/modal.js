@@ -2,7 +2,8 @@ const tweetBtn = document.getElementById('create-tweet');
 const submitTweetBtn = document.getElementById('tweet-submit');
 const tweetForm = document.getElementById('tweet-form');
 const csrf_token = document.getElementsByName('csrfmiddlewaretoken');
-const body = document.getElementById('id_body')
+// const body = document.getElementById('id_body');
+// const photo = document.getElementById('tweet_photo');
 // ----------------------------------------------------------------
 const mentionBtn = document.getElementById('mention-button');
 const mention = document.getElementById('id_mention');
@@ -102,14 +103,18 @@ tweetBtn.addEventListener('click', function (e) {
 
 submitTweetBtn.addEventListener('click', function (e) {
     e.preventDefault;
-
+    const formdata = new FormData(tweetForm);
     $.ajax({
         type: 'POST',
         url: '/compose/tweet/',
-        data: {
-            'csrfmiddlewaretoken': csrf_token[0].value,
-            'body': body.value,
-        },
+        // data: {
+        //     'csrfmiddlewaretoken': csrf_token[0].value,
+        //     'body': body.value,
+        //     'photo': photo.value,
+        // },
+        data: formdata,
+        processData: false,
+        contentType: false,
         success: function (response) {
             toggleModal('modal-id');
             tweetForm.reset();

@@ -7,8 +7,11 @@ class TweetForm(forms.ModelForm):
 
     class Meta:
         model = Tweet
-        fields = ('body',)
-        widgets = {'body': forms.Textarea(attrs={'rows': 5, 'placeholder': 'Whats hapening ... '})}
+        fields = ('body', 'photo')
+        widgets = {
+            'body': forms.Textarea(attrs={'rows': 5, 'placeholder': 'Whats hapening ... '}),
+            'photo': forms.ClearableFileInput(attrs={'multiple': False, 'id': 'tweet_photo'} ),
+            }
 
 
 class MentionForm(forms.ModelForm):

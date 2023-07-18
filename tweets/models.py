@@ -6,6 +6,7 @@ class Tweet(models.Model):
                                related_name='tweets',
                                on_delete=models.CASCADE)
     body = models.CharField(max_length=280, verbose_name="tweet")
+    photo = models.ImageField(upload_to='tweet_photos/', blank=True, null=True)
     users_like = models.ManyToManyField(settings.AUTH_USER_MODEL,
                                  related_name='tweets_liked',
                                  blank=True)

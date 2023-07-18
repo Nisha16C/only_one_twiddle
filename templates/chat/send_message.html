@@ -1,3 +1,4 @@
+{% load static %}
 {% block content %}
     <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; padding: 12px; background-color: #15202b; font-family: 'Courier New', Courier, monospace;">
         <div style="display: flex; justify-content: flex-start; align-items: center; margin-bottom: 20px;">
@@ -15,6 +16,9 @@
                 {% for message in messages %}
                     {% if message.sender == request.user %}
                         <div style="text-align: right; margin-bottom: 1px;">
+                            {% if message.image %}
+                                <img src="{{ message.image.url }}" style="max-width: 200px; max-height: 200px;">
+                            {% endif %}
                             <p style="padding: 10px; border-radius: 20px; display: inline-block; max-width: 70%; background-color: #2b3e51; color: white; font-size: 18px;">
                                 {{ message.content }} 
                             </p>
@@ -23,6 +27,9 @@
                         </div>
                     {% else %}
                         <div style="text-align: left; margin-bottom: 10px;">
+                            {% if message.image %}
+                                <img src="{{ message.image.url }}" style="max-width: 200px; max-height: 200px;">
+                            {% endif %}
                             <p style="padding: 10px; border-radius: 20px; display: inline-block; max-width: 70%; background-color: #60a5fa; color: white; font-size: 18px;">
                                 {{ message.content }}
                             </p>
@@ -32,10 +39,14 @@
                         {% endif %}
                 {% endfor %}
             </div>
-            <form method="post" action="{% url 'send_message' receiver.id %}" style="position: sticky; bottom: 0; padding: 12px;">
+            <form method="post" action="{% url 'send_message' receiver.id %}" style="position: sticky; bottom: 0; padding: 12px;" enctype="multipart/form-data">
                 <div style="display: flex;">
                     {% csrf_token %}
-                    <textarea style="flex: 1; margin-right: 10px; border: 3px solid #60a5fa; border-radius: 25px; padding: 10px; color: rgb(34, 33, 33); font-size: 18px;" name="content" placeholder="Type your message here" required></textarea>
+                    <textarea style="flex: 1; margin-right: 10px; margin-left: 10px; border: 3px solid #60a5fa; border-radius: 25px; padding: 10px; color: rgb(34, 33, 33); font-size: 18px;" name="content" placeholder="Type your message here" required></textarea>
+                    <label for="file-input" style="margin-left: 5px; margin-right: 10px; cursor: pointer;">
+                        <i class="fas fa-image" style="color: #60a5fa; font-size: 30px; margin-top: 10px;"></i>
+                        <input id="file-input" type="file" name="image" accept="image/*" style="display: none;"> <!-- Hide the file input element -->
+                    </label>
                     <input type="submit" value="Send" style="padding: 10px 20px; background-color: #60a5fa; color: white; border: none; border-radius: 30px; cursor: pointer;">
                 </div>
             </form>
@@ -43,4 +54,5 @@
             <p style="text-align: center;">Select a user to start a conversation.</p>
         {% endif %}
     </div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 {% endblock %}

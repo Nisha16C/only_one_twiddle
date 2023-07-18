@@ -12,12 +12,14 @@ from .forms import TweetForm, MentionForm, retweetForm
 from common.decorators import ajax_required
 from actions.utils import create_action
 from django.db.models import Count
+#from django.core.files import File
+
 
 @ajax_required
 @require_POST
 @login_required
 def create_tweet(request):
-    form = TweetForm(request.POST)
+    form = TweetForm(request.POST, request.FILES)
     if form.is_valid():
         author = get_user_model().objects.get(username=request.user.username)
         instance = form.save(commit=False)
@@ -93,6 +95,7 @@ def create_retweet(request, tweet_id):
 @login_required
 def tweet_detail(request, pk):
     original_tweet = get_object_or_404(Tweet, id=pk)
+    tweet_photo = original_tweet.photo
     mentions = original_tweet.mentions.all()
     retweet = original_tweet.retweet.all() 
     mentions = mentions.select_related('author', 'author__profile')\
@@ -103,6 +106,7 @@ def tweet_detail(request, pk):
                'mention_form': MentionForm(),
                'retweet_form': retweetForm(),
                'original_tweet': original_tweet,
+               'tweet_photo': tweet_photo,
                'original_tweet_author': original_tweet.author,
                'original_tweet_author_profile': original_tweet.author.profile,
                'mentions': mentions,
