@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 
 from tweets.forms import TweetForm
-from tweets.models import Tweet, Mention, retweet
+from tweets.models import Tweet, Mention, Retweet
 from tweets.views import tweet_detail
 
 
@@ -26,7 +26,7 @@ def homepage(request):
     user_tweets = Tweet.objects.filter(author_id=request.user.id)
     all_tweets = following_tweets | user_tweets
     all_tweets = all_tweets.select_related('author', 'author__profile',)\
-            .prefetch_related('mentions','retweet', 'users_like')
+            .prefetch_related('mentions','retweets', 'users_like')
 
 
     context = {

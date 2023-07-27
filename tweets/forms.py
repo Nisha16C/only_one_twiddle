@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Tweet, Mention, retweet
+from .models import Tweet, Mention, Retweet
 
 
 class TweetForm(forms.ModelForm):
@@ -22,10 +22,10 @@ class MentionForm(forms.ModelForm):
         widgets = {'mention': forms.Textarea(
             attrs={'rows': 5, 'placeholder': 'Whats hapening ... '})}
 
-class retweetForm(forms.ModelForm):
+class RetweetForm(forms.ModelForm):
 
     class Meta:
-        model = retweet
+        model = Retweet
         fields = ('retweet',)
         widgets = {'retweet': forms.Textarea(
             attrs={'rows': 5, 'placeholder': 'Whats hapening ... '})}

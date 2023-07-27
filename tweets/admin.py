@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Tweet, Mention, retweet
+from .models import Tweet, Mention, Retweet
 
 @admin.register(Mention)
 class MentionAdmin(admin.ModelAdmin):
@@ -12,8 +12,8 @@ class MentionAdmin(admin.ModelAdmin):
         return instance.mention[:20] + ' ...'
     get_mention.short_description = 'Mention'
 
-@admin.register(retweet)
-class retweetAdmin(admin.ModelAdmin):
+@admin.register(Retweet)
+class RetweetAdmin(admin.ModelAdmin):
     list_display = ('author', 'tweet', 'get_retweet', 'like_count', 'created')
     list_filter = ('created',)
     search_fields = ('retweet', 'tweet')

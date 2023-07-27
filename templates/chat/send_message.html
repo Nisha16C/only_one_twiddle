@@ -1,53 +1,56 @@
 {% load static %}
 {% block content %}
-    <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; padding: 12px; background-color: #15202b; font-family: 'Courier New', Courier, monospace;">
-        <div style="display: flex; justify-content: flex-start; align-items: center; margin-bottom: 20px;">
-            <a href="{% url 'home' %}" style="text-decoration: none; font-size: 20px; background-color: #60a5fa; border-radius: 30px; display: flex; align-items: center; color: white; padding: 10px;">
+    <div class="container" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; padding: 12px; background-color: #15202b; font-family: 'Courier New', Courier, monospace;">
+        <div class="header" style="display: flex; justify-content: flex-start; align-items: center; margin-bottom: 20px;">
+            <a href="{% url 'home' %}" class="home-link" style="box-shadow: 2px 5px 7px  #090909; text-decoration: none; font-size: 20px; background-color: #60a5fa; border-radius: 30px; display: flex; align-items: center; color: white; padding: 10px;">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
                     <path d="M9 19v-6h6v6h5v-8h3L12 3 1 11h3v8z"/>
                 </svg>
                 Home
             </a>
-            <h3 style="padding: 0 0 0 10px; margin: 0; margin-left: 45%; font-size: 20px; color: #60a5fa;">{{ receiver.username }}</h3>
+            <h3 class="receiver-username" style="padding: 0 0 0 10px; margin: 0; margin-left: 45%; font-size: 20px; color: #60a5fa;">{{ receiver.username }}</h3>
         </div>
         {% if receiver %}
-            <div style="border: 1px solid white; height: calc(100% - 200px); overflow-y: scroll; padding: 12px; scroll-behavior: smooth;">
-                <div style="margin-bottom: 10px;"></div> <!-- Add this empty div to push latest chat to the bottom -->
+            <div  class="chat-container" style="box-shadow: 1px 1px 5px 5px  #090909; width: 80%; max-width: 800px; margin: 0 auto; border-radius: 20px; border: #15202b; height: calc(100% - 200px); overflow-y: scroll; padding: 12px; scroll-behavior: smooth;">
+                <div class="push"></div>
+                <div style="margin-bottom: 10px;"></div> <!-- Add this empty div to push the latest chat to the bottom -->
                 {% for message in messages %}
                     {% if message.sender == request.user %}
-                        <div style="text-align: right; margin-bottom: 1px;">
+                        <div class="chat-right" style="text-align: right; margin-bottom: 1px;">
                             {% if message.image %}
-                                <img src="{{ message.image.url }}" style="max-width: 200px; max-height: 200px;">
+                                <img class="chat-image" src="{{ message.image.url }}" style="justify-content: right; max-width: 200px; max-height: 200px;">
                             {% endif %}
-                            <p style="padding: 10px; border-radius: 20px; display: inline-block; max-width: 70%; background-color: #2b3e51; color: white; font-size: 18px;">
+                            <br>
+                            <p class="chat-message-right" style=" box-shadow: 2px 1px 8px  #090909; padding: 10px; border-radius: 20px; display: inline-block; max-width: 70%; background-color: #2b3e51; color: white; font-size: 18px;">
                                 {{ message.content }} 
                             </p>
-                            <span style="font-size: 12px; color: gray; display: block; margin-top: -18px; text-align: right; padding: 2px; ">
+                            <span class="chat-timestamp-right" style="font-size: 12px; color: gray; display: block; margin-top: -18px; text-align: right; padding: 2px; ">
                                 {{ message.timestamp }}</span>
                         </div>
                     {% else %}
-                        <div style="text-align: left; margin-bottom: 10px;">
+                        <div class="chat-left" style="text-align: left; margin-bottom: 10px;">
                             {% if message.image %}
-                                <img src="{{ message.image.url }}" style="max-width: 200px; max-height: 200px;">
+                                <img class="chat-image" src="{{ message.image.url }}" style="justify-content: left; max-width: 200px; max-height: 200px;">
                             {% endif %}
-                            <p style="padding: 10px; border-radius: 20px; display: inline-block; max-width: 70%; background-color: #60a5fa; color: white; font-size: 18px;">
+                            <br>
+                            <p class="chat-message-left" style=" box-shadow: 2px 1px 18px #090909; padding: 10px; border-radius: 20px; display: inline-block; max-width: 70%; background-color: #60a5fa; color: white; font-size: 18px;">
                                 {{ message.content }}
                             </p>
-                            <span style="font-size: 12px; color: gray; display: block; margin-top: -18px; text-align: left; padding: 2px; ">
+                            <span class="chat-timestamp-left" style="font-size: 12px; color: gray; display: block; margin-top: -18px; text-align: left; padding: 2px; ">
                                 {{ message.timestamp }}</span>
                         </div>
-                        {% endif %}
+                    {% endif %}
                 {% endfor %}
             </div>
-            <form method="post" action="{% url 'send_message' receiver.id %}" style="position: sticky; bottom: 0; padding: 12px;" enctype="multipart/form-data">
-                <div style="display: flex;">
+            <form method="post" action="{% url 'send_message' receiver.id %}" class="message-form" style="position: sticky; bottom: 0; padding: 12px;" enctype="multipart/form-data">
+                <div class="message-input-container" style="display: flex;">
                     {% csrf_token %}
-                    <textarea style="flex: 1; margin-right: 10px; margin-left: 10px; border: 3px solid #60a5fa; border-radius: 25px; padding: 10px; color: rgb(34, 33, 33); font-size: 18px;" name="content" placeholder="Type your message here" required></textarea>
-                    <label for="file-input" style="margin-left: 5px; margin-right: 10px; cursor: pointer;">
-                        <i class="fas fa-image" style="color: #60a5fa; font-size: 30px; margin-top: 10px;"></i>
+                    <textarea class="message-input" style=" box-shadow: 10px 5px 5px #090909; flex: 1; margin-right: 10px; margin-left: 10px; border: 3px solid #60a5fa; border-radius: 25px; padding: 10px; color: rgb(34, 33, 33); font-size: 18px;" name="content" placeholder="Type your message here" required></textarea>
+                    <label class="image-upload-label" for="file-input" style="margin-left: 5px; margin-right: 10px; cursor: pointer;">
+                        <i class="fas fa-image image-icon" style="color: #60a5fa; font-size: 30px; margin-top: 10px;"></i>
                         <input id="file-input" type="file" name="image" accept="image/*" style="display: none;"> <!-- Hide the file input element -->
                     </label>
-                    <input type="submit" value="Send" style="padding: 10px 20px; background-color: #60a5fa; color: white; border: none; border-radius: 30px; cursor: pointer;">
+                    <input class="send-button" type="submit" value="Send" style="box-shadow: 10px 5px 5px #090909; padding: 10px 20px; background-color: #60a5fa; color: white; border: none; border-radius: 30px; cursor: pointer;">
                 </div>
             </form>
         {% else %}
@@ -55,4 +58,132 @@
         {% endif %}
     </div>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        /* Add responsive styles for different screen sizes */
+
+        /* Small screens */
+        @media (max-width: 768px) {
+        .container {
+            padding: 6px;
+        }
+        .home-link {
+            font-size: 16px;
+            padding: 8px;
+        }
+        .receiver-username {
+            font-size: 16px;
+        }
+        .chat-container {
+            height: calc(100% - 150px);
+        }
+        .message-form {
+            padding: 6px;
+        }
+
+        /* Ensure the button sticks to the bottom */
+        .message-input-container {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap; /* Wrap elements if they exceed the container width */
+            align-items: flex-end; /* Align items to the bottom */
+        }
+
+        .message-input {
+            flex: 1; /* Allow textarea to grow and occupy the available space */
+            margin-right: 10px;
+            margin-left: 10px;
+            border: 3px solid #60a5fa;
+            border-radius: 25px;
+            padding: 10px;
+            color: rgb(34, 33, 33);
+            font-size: 18px;
+            resize: none; /* Prevent textarea resizing */
+            min-height: 40px; /* Set a minimum height for the textarea */
+        }
+
+        .image-upload-label {
+            margin-left: 5px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .send-button {
+            padding: 10px 20px;
+            background-color: #60a5fa;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            width: 100%; /* Ensure the button occupies the full width */
+            margin-top: 6px; /* Add some space between textarea and button */
+            padding-bottom: 10px;
+        }
+        .chat-image{
+            width: 150px;
+            height: 150px;
+            
+        }
+    }
+
+        /* @media (max-width: 768px) {
+            .container {
+                padding: 6px;
+            }
+            .home-link {
+                font-size: 16px;
+                padding: 8px;
+            }
+            .receiver-username {
+                font-size: 16px;
+            }
+            .chat-container {
+                height: calc(100% - 150px);
+            }
+            .message-form {
+                padding: 6px;
+                
+            }
+        } */
+
+        /* Medium screens */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .container {
+                padding: 10px;
+            }
+            .home-link {
+                font-size: 18px;
+                padding: 12px;
+            }
+            .receiver-username {
+                font-size: 18px;
+            }
+            .chat-container {
+                height: calc(100% - 170px);
+            }
+            .message-form {
+                padding: 10px;
+            }
+        }
+
+        /* Large screens */
+        @media (min-width: 1025px) {
+            .container {
+                padding: 12px;
+            }
+            .home-link {
+                font-size: 20px;
+                padding: 14px;
+            }
+            .receiver-username {
+                font-size: 20px;
+            }
+            .chat-container {
+                height: calc(100% - 200px);
+            }
+            .message-form {
+                padding: 12px;
+            }
+        }
+    </style>
+
 {% endblock %}

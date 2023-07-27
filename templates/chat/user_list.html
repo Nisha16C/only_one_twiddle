@@ -1,18 +1,18 @@
 {% load static %}
 {% block content %}
-    <div style="text-align: center; background-color: #15202b; font-family: 'Courier New', Courier, monospace; height: 100vh; display: flex; justify-content: center;">
-        <a href="{% url 'home' %}" style="position: absolute; top: 10; left: 10; text-decoration: none; font-size: 20px; margin-top: 20px; margin-left: 20px; background-color: #60a5fa; border-radius: 30px; display: flex; align-items: center; color: white; padding: 10px;">
+    <div class="container" style="text-align: center; background-color: #15202b; font-family: 'Courier New', Courier, monospace; height: 100vh; display: flex; justify-content: center;">
+        <a href="{% url 'home' %}" style=" box-shadow: 2px 5px 7px  #090909; position: absolute; top: 10; left: 10; text-decoration: none; font-size: 20px; margin-top: 20px; margin-left: 20px; background-color: #60a5fa; border-radius: 30px; display: flex; align-items: center; color: white; padding: 10px;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
                 <path d="M9 19v-6h6v6h5v-8h3L12 3 1 11h3v8z"/>
             </svg>
             Home
         </a>
         <div>
-            <h2 style="padding: 20px 10px; font-size: 20px; color: #f9f7f7;"><b>Select a user to start a conversation.</b></h2>
-            <ul style="list-style-type: none; padding: 0;">
+            <h2 class="user-list" style="padding: 20px 10px; font-size: 20px; color: #f9f7f7;"><b>Select a user to start a conversation.</b></h2>
+            <ul class="user-items" style="list-style-type: none; padding: 0;">
                 {% for user in users %}
                     <li style="margin-bottom: 15px;">
-                        <a href="{% url 'send_message' user.id %}" style="display: block; font-size: 18px; padding: 10px; background-color: #60a5fa; border: 1px solid #ccc; border-radius: 50px; text-decoration: none; color: #f9f7f7;">
+                        <a class="user-link" href="{% url 'send_message' user.id %}" style=" box-shadow: 2px 5px 7px  #090909; display: block; font-size: 18px; padding: 10px; background-color: #60a5fa; border: 1px solid #ccc; border-radius: 50px; text-decoration: none; color: #f9f7f7;">
                             <!-- <img src="{{ user.avatar.url }}" alt="{{ user.username }}" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 10px;"> -->
                             {{ user.username }}
                         </a>
@@ -21,4 +21,42 @@
             </ul>
         </div>
     </div>
+<style>
+            /* Responsive styles for different screen sizes */
+
+        /* Small screens */
+        @media (max-width: 768px) {
+        .container {
+            font-size: 16px;
+            padding: 20px;
+        }
+
+        .user-list {
+            font-size: 20px;
+            margin-top: 50px;
+        }
+
+        .user-link {
+            font-size: 18px;
+            padding: 10px;
+        }
+        }
+
+        /* Medium screens */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .container {
+                font-size: 18px;
+            }
+
+            .user-link {
+                font-size: 18px;
+                padding: 10px;
+            }
+        }
+
+        /* Large screens */
+        @media (min-width: 1025px) {
+            /* No specific changes for large screens */
+        }
+</style>
 {% endblock %}

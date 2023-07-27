@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
 
 from .models import Action
-from tweets.models import Tweet, Mention, retweet
+from tweets.models import Tweet, Mention, Retweet
 
 
 @login_required
@@ -37,26 +37,25 @@ def notifications(request):
         .select_related('user')\
         .prefetch_related('target', 'target__author', 'target__author__profile')
 
-    return render(request, 'actions/notifications.html', {'follow_notifications': follow_notifications,
-                                                          'mention_notifications': mention_notifications,
-                                                          'like_tweet_notifications': like_tweet_notifications,
-                                                          'like_mention_notifications': like_mention_notifications,
-                                                          })
     # Retweet to tweet
-    retweet_notifications = Action.objects.filter(target_ct=target_ct_tweet,
-                                                  target_id__in=tweet_ids).exclude(verb='like tweet')\
-        .select_related('user', 'user__profile')
-    # like retweet
-    target_ct_retweet = ContentType.objects.get_for_model(retweet)
-    retweet_ids = request.user.retweet.values_list('id', flat=True)
-    like_retweet_notifications = Action.objects.filter(target_ct=target_ct_retweet,
-                                                       target_id__in=retweet_ids,
-                                                       verb='like retweet')\
-        .select_related('user')\
-        .prefetch_related('target', 'target__author', 'target__author__profile')
+    # retweet_notifications = Action.objects.filter(target_ct=target_ct_tweet,
+    #                                               target_id__in=tweet_ids).exclude(verb='like tweet')\
+    #     .select_related('user', 'user__profile')
+    # # like retweet
+    # target_ct_retweet = ContentType.objects.get_for_model(Retweet)
+    # retweet_ids = request.user.retweets.values_list('id', flat=True)
+    # like_retweet_notifications = Action.objects.filter(target_ct=target_ct_retweet,
+    #                                                    target_id__in=retweet_ids,
+    #                                                    verb='like retweet')\
+    #     .select_related('user')\
+    #     .prefetch_related('target', 'target__author', 'target__author__profile')
+
+    
 
     return render(request, 'actions/notifications.html', {'follow_notifications': follow_notifications,
-                                                          'retweet_notifications': retweet_notifications,
+                                                          'mention_notifications': mention_notifications,
+                                                          #'retweet_notifications': retweet_notifications,
                                                           'like_tweet_notifications': like_tweet_notifications,
-                                                          'like_retweet_notifications': like_retweet_notifications,
+                                                          'like_mention_notifications': like_mention_notifications,
+                                                          #'like_retweet_notifications': like_retweet_notifications,
                                                           })
