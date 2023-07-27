@@ -21,8 +21,10 @@
                                 <img class="chat-image" src="{{ message.image.url }}" style="justify-content: right; max-width: 200px; max-height: 200px;">
                             {% endif %}
                             <br>
-                            <p class="chat-message-right" style=" box-shadow: 2px 1px 8px  #090909; padding: 10px; border-radius: 20px; display: inline-block; max-width: 70%; background-color: #2b3e51; color: white; font-size: 18px;">
-                                {{ message.content }} 
+                            <p class="chat-message-right" style="box-shadow: 2px 1px 8px  #090909; padding: 10px; border-radius: 20px; display: inline-block; max-width: 45%; word-wrap: break-word; background-color: #2b3e51; color: white; font-size: 18px;">
+                                {% autoescape off %}
+                                    {{ message.content | urlize }} <!-- Apply the urlize filter to convert URLs into clickable links -->
+                                {% endautoescape %}
                             </p>
                             <span class="chat-timestamp-right" style="font-size: 12px; color: gray; display: block; margin-top: -18px; text-align: right; padding: 2px; ">
                                 {{ message.timestamp }}</span>
@@ -33,8 +35,10 @@
                                 <img class="chat-image" src="{{ message.image.url }}" style="justify-content: left; max-width: 200px; max-height: 200px;">
                             {% endif %}
                             <br>
-                            <p class="chat-message-left" style=" box-shadow: 2px 1px 18px #090909; padding: 10px; border-radius: 20px; display: inline-block; max-width: 70%; background-color: #60a5fa; color: white; font-size: 18px;">
-                                {{ message.content }}
+                            <p class="chat-message-left" style="box-shadow: 2px 1px 18px #090909; padding: 10px; border-radius: 20px; display: inline-block; max-width: 45%; word-wrap: break-word; background-color: #60a5fa; color: white; font-size: 18px;">
+                                {% autoescape off %}
+                                    {{ message.content | urlize }} <!-- Apply the urlize filter to convert URLs into clickable links -->
+                                {% endautoescape %}
                             </p>
                             <span class="chat-timestamp-left" style="font-size: 12px; color: gray; display: block; margin-top: -18px; text-align: left; padding: 2px; ">
                                 {{ message.timestamp }}</span>
@@ -59,6 +63,17 @@
     </div>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
+        .chat-message-right a{
+            color: #60a5fa; /* Change link color to your preference */
+            text-decoration: underline; /* Add underline to indicate it's a link */
+            cursor: pointer;
+        }
+        
+        .chat-message-left a {
+            color: #0000ff; /* Change link color to your preference */
+            text-decoration: underline; /* Add underline to indicate it's a link */
+            cursor: pointer;
+        }
         /* Add responsive styles for different screen sizes */
 
         /* Small screens */
