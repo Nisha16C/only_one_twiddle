@@ -1,0 +1,20 @@
+{% extends "account/base.html" %}
+{% block head_title %}Login with OTP{% endblock %}
+
+{% block content %}
+  <h2 class="mt-6 text-3xl font-extrabold text-center text-gray-300 leading-9">
+    Login with OTP
+  </h2>
+  <form method="POST">
+    {% csrf_token %}
+    <div class="mt-4">
+      <label for="phone_number" class="block font-medium text-gray-700">Enter your phone number:</label>
+      <input type="text" name="phone_number" id="phone_number" required class="form-input mt-1 block w-full">
+      <!-- <label for="username" class="block font-medium text-gray-700">Enter your username:</label>
+      <input type="text" name="username" id="username" required class="form-input mt-1 block w-full"> -->
+    
+    </div>
+
+    <button type="submit" class="mt-4 w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-500 focus:outline-none focus:bg-indigo-700">Send OTP</button>
+  </form>
+{% endblock %}

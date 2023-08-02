@@ -46,6 +46,9 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
 
+    # github
+    'allauth.socialaccount.providers.github',
+
     # For widget tweaking
     'widget_tweaks',
     # For debugging
@@ -188,7 +191,7 @@ AUTHENTICATION_BACKENDS = [
     # `allauth` specific authentication methods, such as login by e-mail
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
-SITE_ID = 1
+SITE_ID = 3
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -230,3 +233,20 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
+
+#provider github
+SOCIALACCOUNT_PROVIDERS = {
+    'github': {
+        'APP': {
+            'client_id': 'cd077d77842fa53beebb',
+            'secret': '0179f2cb26a9a637a2254e33ab1f1aba54bc8f08',
+            'key': ''
+        }
+    }
+}
+
+# settings.py
+
+TWILIO_ACCOUNT_SID = 'AC4947299d577af3f7ab53330c2c5bed41'
+TWILIO_AUTH_TOKEN = '0f48c570f667d6095b1b3562262f0c4a'
+TWILIO_PHONE_NUMBER = '+17623095435'

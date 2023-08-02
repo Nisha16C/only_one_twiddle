@@ -7,7 +7,7 @@
 
 {% block content %}
 
-<div class="p-relative h-screen" style="background-color: #15202b">
+<div class="p-relative h-screen" >
     <div class="flex justify-center">
         {% include "includes/left_sidebar.html" %}
         <main role="main">
@@ -36,7 +36,7 @@
               <ul class="list-none">
                 <li>
                   <!--tweet-->
-                  <article class="hover:bg-gray-800 transition duration-350 ease-in-out">
+                  <article class=" transition duration-350 ease-in-out">
                     <div class="flex flex-shrink-0 p-4 pb-0">
                       <div class="flex-shrink-0 group block">
                         <div class="flex items-center">
@@ -269,12 +269,12 @@
     box-shadow: 5px 8px 10px  #334964;
   }
   
-  .tweet-photo:hover {
+  /* .tweet-photo:hover {
     margin-top: 10px;
     margin-right: 5px;
-    transform: scale(1.1); /* Zoom in effect */
-    border-color: #60a5fa; /* Change border color on hover */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Add shadow on hover */
-  }
+    transform: scale(1.1);
+    border-color: #60a5fa; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); 
+  } */
 </style>
 {% endblock content %}

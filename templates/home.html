@@ -7,7 +7,7 @@
 
 {% block content %}
 
-<div class="p-relative h-screen" style="background-color: #15202b">
+<div class="p-relative h-screen" >
     <div class="flex justify-center">
         <div class="left-sidebar">
           {% include "includes/left_sidebar.html" %}
@@ -37,9 +37,9 @@
 
               <ul class="list-none">
                 {% for tweet in all_tweets %}
-                <li>
+                <li style="background-color: #1b5594";>
                   <!--tweet-->
-                  <article class="hover:bg-gray-800 transition duration-350 ease-in-out">
+                  <article class=" transition duration-350 ease-in-out">
                     <div class="flex flex-shrink-0 p-4 pb-0">
                       <a href="{% url "profile" tweet.author.username %}" class="flex-shrink-0 group block">
                         <div class="flex items-center">
@@ -57,7 +57,7 @@
                         </div>
                       </a>
                     </div>
-                    <div class="pl-16">
+                    <div class="pl-16" >
                       <a href="{% url "tweet_detail" tweet.id %}">
                       <p class="text-base width-auto font-small text-white flex-shrink">
                       {{ tweet.body }}
@@ -124,7 +124,7 @@
 {% include "includes/tweet_form.html" %}
 
 <style>
-  .image-container {
+   .image-container {
     position: relative;
     margin-top: 5px;
     display: inline-block;
@@ -138,15 +138,15 @@
     object-fit: contain;
     transition: transform 0.1s, border-color 0.2s;
     box-shadow: 5px 8px 10px  #334964;
-  }
+  } /*
   
   .tweet-photo:hover {
     margin-top: 10px;
     margin-right: 5px;
     transform: scale(1.1); /* Zoom in effect */
-    border-color: #60a5fa; /* Change border color on hover */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Add shadow on hover */
-  }
+    /* border-color: #60a5fa; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); 
+  } */
   /* @media screen and (max-width: 768px) {
     .left-sidebar,
     .right-sidebar {

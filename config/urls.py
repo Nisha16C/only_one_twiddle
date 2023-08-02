@@ -23,6 +23,8 @@ urlpatterns = [
     path('', include('actions.urls')),
     # Pages app
     path('', include('pages.urls')),
+     path('', include('otp.urls')),
+   
 
     # Tweet stuff
     path('compose/', include('tweets.urls')),
