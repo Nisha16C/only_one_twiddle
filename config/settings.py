@@ -21,7 +21,8 @@ SECRET_KEY = env.str("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DEBUG", default=False)
 
-ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1', '10.0.1.13', '10.0.1.129', 'twitter.os3.com']
+ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1', '10.0.1.109', 'twitter.os3.com']
+
 
 
 # Application definition
@@ -48,7 +49,8 @@ INSTALLED_APPS = [
 
     # github
     'allauth.socialaccount.providers.github',
-
+    # django otp
+ 
     # For widget tweaking
     'widget_tweaks',
     # For debugging
@@ -58,6 +60,8 @@ INSTALLED_APPS = [
 
     # For about and home page
     'pages.apps.PagesConfig',
+    
+    'mobile_otp',
 
     # For user profiles
     'profiles.apps.ProfilesConfig',
@@ -71,6 +75,8 @@ INSTALLED_APPS = [
     # # For Chat
     # 'mychatapp.apps.MychatappConfig'
     'chat',
+ 
+  
 
 ]
 
@@ -114,9 +120,9 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    "default": env.dj_db_url("DATABASE_URL")
-}
+# DATABASES = {
+#     "default": env.dj_db_url("DATABASE_URL")
+# }
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
@@ -127,12 +133,12 @@ DATABASES = {
 #         'PORT': '5432',
 #     }
 # }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -247,6 +253,6 @@ SOCIALACCOUNT_PROVIDERS = {
 
 # settings.py
 
-TWILIO_ACCOUNT_SID = 'AC4947299d577af3f7ab53330c2c5bed41'
-TWILIO_AUTH_TOKEN = '0f48c570f667d6095b1b3562262f0c4a'
-TWILIO_PHONE_NUMBER = '+17623095435'
+TWILIO_ACCOUNT_SID = 'ACa15c520f3c63eb4745384784262cd38d'
+TWILIO_AUTH_TOKEN = 'b36c3bef11f957dc63ec7a7ec4e50e99'
+TWILIO_PHONE_NUMBER = '+12316248749'

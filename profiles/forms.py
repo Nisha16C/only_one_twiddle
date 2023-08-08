@@ -15,5 +15,5 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = ('bio', 'avatar', 'header',)
+        fields = ('bio', 'avatar', 'header', )
         widgets = {'bio': forms.Textarea}

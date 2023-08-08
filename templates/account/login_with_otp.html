@@ -5,6 +5,13 @@
   <h2 class="mt-6 text-3xl font-extrabold text-center text-gray-300 leading-9">
     Login with OTP
   </h2>
+  {% comment %} {% if messages %}
+  <ul class="messages">
+      {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+  </ul>
+{% endif %} {% endcomment %}
   <form method="POST">
     {% csrf_token %}
     <div class="mt-4">

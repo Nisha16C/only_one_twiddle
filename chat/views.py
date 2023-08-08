@@ -7,52 +7,28 @@ from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import Chat, Message
 from django.contrib.auth.decorators import login_required
+from django.db.models import Count, Q
 # from django.db.models import Count
 
-
-# @login_required
-# def user_list(request):
-#     users = User.objects.exclude(id=request.user.id)
-#     chats = Chat.objects.filter(participants=request.user).annotate(num_participants=Count('participants')).filter(num_participants=2)
-#     return render(request, 'chat/user_list.html', {'users': users, 'chats': chats})
-
-
-
-# @login_required
-# def user_list(request):
-#     users = User.objects.exclude(id=request.user.id)
-#     return render(request, 'chat/user_list.html', {'users': users})
-
-
-# def user_list(request):
-#     users = User.objects.exclude(id=request.user.id)
-#     chats = Chat.objects.filter(participants=request.user)
-#     return render(request, 'chat/user_list.html', {'users': users, 'chats': chats})
+# Import the Q object here
 
 @login_required
 def user_list(request):
-    users = User.objects.exclude(id=request.user.id)
-    return render(request, 'chat/user_list.html', {'users': users})
+    current_user = request.user
 
-# @login_required
-# def send_message(request, user_id):
-#     receiver = get_object_or_404(User, id=user_id)
-#     sender = request.user
+    # Get all users excluding the current user
+    users = User.objects.exclude(id=current_user.id)
 
-#     chat = Chat.objects.filter(participants=sender).filter(participants=receiver).first()
-#     if not chat:
-#         chat = Chat.objects.create()
-#         chat.participants.add(sender, receiver)
+    # Iterate through each user and get their unread message count to the current user
+    for user in users:
+        unread_count = Message.objects.filter(sender=user, receiver=current_user, is_read=False).count()
+        user.unread_count = unread_count
 
-#     if request.method == 'POST':
-#         content = request.POST['content']
-#         message = Message.objects.create(sender=sender, receiver=receiver, content=content)
-#         chat.messages.add(message)
-#         chat.save()
-#         return redirect('user_list')
+    # Calculate the total unread messages count from all senders to the current user
+    total_unread_count = Message.objects.filter(receiver=current_user, is_read=False).count()
 
-#     messages = chat.messages.all() if chat else []
-#     return render(request, 'chat/send_message.html', {'receiver': receiver, 'messages': messages})
+    return render(request, 'chat/user_list.html', {'users': users, 'total_unread_count': total_unread_count})
+
 @login_required
 def send_message(request, user_id):
     receiver = get_object_or_404(User, id=user_id)
@@ -63,6 +39,10 @@ def send_message(request, user_id):
         chat = Chat.objects.create()
         chat.participants.add(sender, receiver)
 
+    # Mark messages as read when the user clicks on the user
+    unread_messages = Message.objects.filter(sender=receiver, receiver=sender, is_read=False)
+    unread_messages.update(is_read=True)
+    
     if request.method == 'POST':
         content = request.POST['content']
         image =  request.FILES.get('image')
@@ -74,65 +54,4 @@ def send_message(request, user_id):
     messages = chat.messages.order_by('timestamp') if chat else []
     return render(request, 'chat/send_message.html', {'receiver': receiver, 'messages': messages})
 
-
-# @login_required
-# def send_message(request, user_id):
-#     receiver = get_object_or_404(User, id=user_id)
-#     sender = request.user
-
-#     chat = Chat.objects.filter(participants=sender).filter(participants=receiver).first()
-#     if not chat:
-#         chat = Chat.objects.create()
-#         chat.participants.add(sender, receiver)
-
-#     if request.method == 'POST':
-#         content = request.POST['content']
-#         message = Message.objects.create(sender=sender, receiver=receiver, content=content)
-#         chat.messages.add(message)
-#         chat.save()
-#         return redirect('user_list')
-
-#     messages = chat.messages.all() if chat else []
-#     return render(request, 'chat/send_message.html', {'receiver': receiver, 'messages': messages})
-
-# def send_message(request, user_id):
-#     receiver = get_object_or_404(User, id=user_id)
-#     sender = request.user
-
-#     chat = Chat.objects.filter(participants=sender).filter(participants=receiver).first()
-#     if not chat:
-#         chat = Chat.objects.create()
-#         chat.participants.add(sender, receiver)
-
-#     if request.method == 'POST':
-#         content = request.POST['content']
-#         message = Message.objects.create(sender=sender, receiver=receiver, content=content)
-#         chat.messages.add(message)
-#         chat.save()
-#         return redirect('user_list')
-
-#     messages = chat.messages.all() if chat else []
-#     return render(request, 'chat/send_message.html', {'receiver': receiver, 'messages': messages})
-
-# def send_message(request, user_id):
-#     receiver = get_object_or_404(User, id=user_id)
-
-#     if request.method == 'POST':
-#         content = request.POST['content']
-#         sender = request.user
-
-#         message = Message.objects.create(sender=sender, receiver=receiver, content=content)
-
-#         # Create or get the chat between the sender and receiver
-#         chat = Chat.objects.filter(participants=sender).filter(participants=receiver).first()
-#         if not chat:
-#             chat = Chat.objects.create()
-#             chat.participants.add(sender, receiver)
-
-#         chat.messages.add(message)
-#         chat.save()
-
-#         return redirect('user_list')
-
-#     return render(request, 'chat/send_message.html', {'receiver': receiver})
 

@@ -1,3 +1,9 @@
+# views.py
+from django.shortcuts import render, redirect
+from mobile_otp.models import PhoneNumber
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -110,3 +116,14 @@ def user_follow(request):
         except get_user_model().DoesNotExist:
             return JsonResponse({'status': 'error'})
     return JsonResponse({'status': 'error'})
+
+
+
+
+
+
+
+
+
+
+

@@ -23,7 +23,7 @@ urlpatterns = [
     path('', include('actions.urls')),
     # Pages app
     path('', include('pages.urls')),
-     path('', include('otp.urls')),
+    path('', include('mobile_otp.urls')),
    
 
     # Tweet stuff
