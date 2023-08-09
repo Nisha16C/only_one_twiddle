@@ -49,6 +49,9 @@ INSTALLED_APPS = [
 
     # github
     'allauth.socialaccount.providers.github',
+    'allauth.socialaccount.providers.facebook',
+
+
     # django otp
  
     # For widget tweaking
@@ -228,28 +231,28 @@ INTERNAL_IPS = [
 ]
 # MESSAGE_STORAGE = 'django.contrib.messages.storage.base.BaseStorage'
 #provider auth
-SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        'SCOPE': [
-            'profile',
-            'email',
-        ],
-        'AUTH_PARAMS': {
-            'access_type': 'online',
-        }
-    }
-}
+# SOCIALACCOUNT_PROVIDERS = {
+#     'google': {
+#         'SCOPE': [
+#             'profile',
+#             'email',
+#         ],
+#         'AUTH_PARAMS': {
+#             'access_type': 'online',
+#         }
+#     }
+# }
 
 #provider github
-SOCIALACCOUNT_PROVIDERS = {
-    'github': {
-        'APP': {
-            'client_id': 'cd077d77842fa53beebb',
-            'secret': '0179f2cb26a9a637a2254e33ab1f1aba54bc8f08',
-            'key': ''
-        }
-    }
-}
+# SOCIALACCOUNT_PROVIDERS = {
+#     'github': {
+#         'APP': {
+#             'client_id': 'cd077d77842fa53beebb',
+#             'secret': '0179f2cb26a9a637a2254e33ab1f1aba54bc8f08',
+#             'key': ''
+#         }
+#     }
+# }
 
 # settings.py
 

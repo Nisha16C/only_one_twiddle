@@ -30,7 +30,10 @@ urlpatterns = [
     path('compose/', include('tweets.urls')),
 
     # # Chat app
-    path('chat/', include("chat.urls"))
+    path('chat/', include("chat.urls")),
+
+    path('social-auth/', include('social_django.urls', namespace='social')),
+
     
 
 ]
