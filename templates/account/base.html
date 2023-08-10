@@ -10,9 +10,10 @@
     <meta name="description" content="Twiddle">
     <meta name="author" content="OS3 Infotech Pvt Ltd">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{% static "css/style.min.css" %}">
-    <link rel="shortcut icon" href="{% static "favicon.ico" %}">
-    <link rel="icon" href="{% static "favicon.ico" %}">
+    <link rel="stylesheet" href="{% static "css/style.min.css" %}" integrity="sha256-uKJOxe9XiuTjN+yf8sGo8VTAtzcQT7VqcQ8TO4rTj5s=" >
+    <link rel="shortcut icon" href="{% static "favicon.ico" %}" integrity="sha256-NH1D9D34nb/bM6BN22No9mlJBGjThgmfOqftW0B7CCo=">
+    <link rel="icon" href="{% static "favicon.ico" %}" integrity="sha256-NH1D9D34nb/bM6BN22No9mlJBGjThgmfOqftW0B7CCo=" >
+
     {% block extra_head %}
     {% endblock %}
   </head>
@@ -108,8 +109,8 @@
               document.getElementById(collapseID).classList.toggle("flex");
             }
     </script>
-    <script src="https://kit.fontawesome.com/faa629c1cc.js" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/@popperjs/core@2.9.1/dist/umd/popper.min.js" charset="utf-8"></script>
+    <script src="https://kit.fontawesome.com/faa629c1cc.js" integrity="sha384-nfeAS/0k+P+KwGmVoI09n1Udf2ddOS5HX0OjDmhcTVoHE5B1ziqPmnwnUy3TRzo " crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" charset="utf-8"></script>
     <script>
       function openDropdown(event,dropdownID){
         let element = event.target;
