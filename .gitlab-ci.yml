@@ -1,0 +1,59 @@
+stages: 
+  - build
+  - test
+  - deploy
+  - dast
+ 
+include:
+  - template: Security/SAST.gitlab-ci.yml
+  - template: Jobs/Code-Quality.gitlab-ci.yml
+  - template: DAST.gitlab-ci.yml
+
+dast:  
+  stage: dast
+  tags:
+    - docker
+  when: manual
+  variables:
+    DAST_WEBSITE: "http://10.0.1.109:8000"
+    DAST_FULL_SCAN_ENABLED: "true"
+
+code_quality:  
+  stage: test
+  when: manual
+  tags:
+    - docker
+    
+
+sast:
+  stage: test
+  when: manual
+  tags:
+    - docker-test
+
+
+# docker:build:
+#   when: manual 
+#   stage: build
+#   tags: 
+#     - twitter
+#   script:
+#     - sudo docker build -t aasthagupta02/twitter-img:v2 .
+   
+  
+# docker:push:
+#   when: manual
+#   stage: deploy
+#   tags:
+#     - docker-test
+
+#   before_script:
+#     - echo $DOCKER_PASSWORD | sudo docker login -u $DOCKER_USER --password-stdin $CI_REGISTRY
+
+#   script:
+#     - docker push aasthagupta02/twitter-img:v2
+
+#   after_script:
+#     - docker images ls
+    
+  
