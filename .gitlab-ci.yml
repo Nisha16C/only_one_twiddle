@@ -1,13 +1,22 @@
 stages: 
   - build
   - test
+  - scan
   - deploy
   - dast
+
+# variables:
+#   SAST_EXCLUDED_ANALYZERS: "spotbugs,security-code-scan"
+#   DS_EXCLUDED_ANALYZERS: "gemnasium-maven"
+#   TAG: "1.0"
  
 include:
   - template: Security/SAST.gitlab-ci.yml
   - template: Jobs/Code-Quality.gitlab-ci.yml
   - template: DAST.gitlab-ci.yml
+  # - template: Jobs/Dependency-Scanning.gitlab-ci.yml
+  # - template: Security/Container-Scanning.gitlab-ci.yml
+
 
 dast:  
   stage: dast
@@ -17,6 +26,46 @@ dast:
   variables:
     DAST_WEBSITE: "http://10.0.1.109:8000"
     DAST_FULL_SCAN_ENABLED: "true"
+
+
+# dependency_scanning:
+#   stage: test
+#   when: manual
+#   tags:
+#     - docker
+    
+
+# dependency_check_scan:
+#   stage: scan
+#   image: owasp/dependency-check:latest
+#   when: manual
+#   tags:
+#     - docker
+#   script:
+    # - /usr/share/dependency-check/bin/dependency-check.sh --scan report/requirements.txt
+#  artifacts:
+#    reports:
+#      dependency_scanning: reports/gl-dependency-scanning-report.json
+
+
+# container_scanning: 
+#   when: manual
+#   tags:
+#     - docker
+#   stage: test
+#   variables:
+#     CS_IMAGE: $CI_REGISTRY_IMAGE:$TAG
+#     CS_REGISTRY_USER: $DOCKER_USER
+#     CS_REGISTRY_PASSWORD: $DOCKER_PASSWORD
+#     CS_DOCKERFILE_PATH: src/frontend/
+#     GIT_STRATEGY: fetch
+
+# container_scanning: 
+#   when : manual
+#   tags:
+#     - twitter
+#   stage: test
+ 
 
 code_quality:  
   stage: test
@@ -32,28 +81,28 @@ sast:
     - docker-test
 
 
-# docker:build:
-#   when: manual 
-#   stage: build
-#   tags: 
-#     - twitter
-#   script:
-#     - sudo docker build -t aasthagupta02/twitter-img:v2 .
+docker:build:
+  when: manual 
+  stage: build
+  tags: 
+    - twitter
+  script:
+    - sudo docker build -t aasthagupta02/twitter-img:v2 .
    
   
-# docker:push:
-#   when: manual
-#   stage: deploy
-#   tags:
-#     - docker-test
+docker:push:
+  when: manual
+  stage: deploy
+  tags:
+    - docker-test
 
-#   before_script:
-#     - echo $DOCKER_PASSWORD | sudo docker login -u $DOCKER_USER --password-stdin $CI_REGISTRY
+  before_script:
+    - echo $DOCKER_PASSWORD | sudo docker login -u $DOCKER_USER --password-stdin $CI_REGISTRY
 
-#   script:
-#     - docker push aasthagupta02/twitter-img:v2
+  script:
+    - docker push aasthagupta02/twitter-img:v2
 
-#   after_script:
-#     - docker images ls
+  after_script:
+    - docker images ls
     
   
