@@ -48,7 +48,7 @@ if (mentionForm !== null) {
 // ----------------------------------------------------------------
 if (retweetForm !== null) {
     const tweetURL = retweetForm.getAttribute('data-tweet');
-    // For mention
+    // For retweet
     retweetBtn.addEventListener('click', function (e) {
         e.preventDefault();
         toggleModal('retweet-modal');

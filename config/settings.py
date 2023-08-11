@@ -84,7 +84,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -260,11 +259,3 @@ INTERNAL_IPS = [
 TWILIO_ACCOUNT_SID = 'ACa15c520f3c63eb4745384784262cd38d'
 TWILIO_AUTH_TOKEN = 'b36c3bef11f957dc63ec7a7ec4e50e99'
 TWILIO_PHONE_NUMBER = '+12316248749'
-
-
-# Adding by ashish
-#  Cors-headers
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8000/",  # Add your frontend domain here
-    "http://10.0.1.109:8000/",  # Add your server IP and port
-]
