@@ -28,6 +28,7 @@ ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1', '10.0.1.109', 'twit
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -92,6 +93,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    
     # For debug_toolbar
     #'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
@@ -259,3 +263,30 @@ INTERNAL_IPS = [
 TWILIO_ACCOUNT_SID = 'ACa15c520f3c63eb4745384784262cd38d'
 TWILIO_AUTH_TOKEN = 'b36c3bef11f957dc63ec7a7ec4e50e99'
 TWILIO_PHONE_NUMBER = '+12316248749'
+
+CORS_ALLOWED_ORIGINS = [
+
+"http://localhost:8000",
+"http://127.0.0.1:8000"
+]
+
+CORS_ALLOW_METHODS = [
+'DELETE',
+'GET',
+'OPTIONS',
+'PATCH',
+'POST',
+'PUT',
+]
+
+CORS_ALLOW_HEADERS = [
+'accept',
+'accept-encoding',
+'authorization',
+'content-type',
+'dnt',
+'origin',
+'user-agent',
+'x-csrftoken',
+'x-requested-with',
+]
