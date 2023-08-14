@@ -23,8 +23,7 @@
         const $this = $(this);
         const $parent = $this.parent();
         const updateElementIndex = function(el, prefix, ndx) {
-            const id_regex_pattern = `^${prefix}-(\\d+|__prefix__)$`;
-            const id_regex = new RegExp(id_regex_pattern);
+            const id_regex = new RegExp("(\\b" + prefix + "-(\\d+|__prefix__))");
             const replacement = prefix + "-" + ndx;
             if ($(el).prop("for")) {
                 $(el).prop("for", $(el).prop("for").replace(id_regex, replacement));
