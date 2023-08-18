@@ -1,4 +1,4 @@
-<aside class="w-2/5 h-12 position-relative">
+<aside class="w-2/5 h-12 position-relative ml-4">
 
   <!--Aside menu (right side)-->
   <div style="max-width:350px;">
@@ -52,7 +52,7 @@
                 <p class="text-base leading-6 font-medium text-white">
                 {{ p.first_name|default:p.username|capfirst }}
                 </p>
-                <p class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
+                <p class="text-sm roption leading-5 font-medium  group-hover:text-gray-300 transition ease-in-out duration-150">
                 @{{ p.username }}
                 </p>
               </div>
@@ -70,7 +70,9 @@
         {% endfor %}
         {% endif %}
       </div>
-      <div class="relative  ml-4 p-auto" style="background-color: #1f2833";>
+
+      <!-- See user list section  -->
+      <div class="relative  ml-4 p-auto" style="background-color: #1f2833; width: 312px; border-radius: 7px;">
         <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="user-list mb-2 text-white  hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5  inline-flex dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
           See all users
         </button>
@@ -95,9 +97,11 @@
    .search-clr{
     background-color: #0b0c10;
    }
-  .user-list{
-    
-  }
+ 
+.roption{
+  color: #000000;
+}
+
 </style>
 
 <script>
@@ -115,3 +119,6 @@
     }
   });
 </script>
+
+
+

@@ -21,14 +21,12 @@ SECRET_KEY = env.str("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DEBUG", default=False)
 
-ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1', '10.0.1.109', 'twitter.os3.com']
-
+ALLOWED_HOSTS = [ 'localhost', '127.0.0.1', '10.0.0.131', 'twiddle.campus2pro.co.in']
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -47,25 +45,19 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-
-    # github
-    'allauth.socialaccount.providers.github',
     'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.github',
 
-
-    # django otp
- 
     # For widget tweaking
     'widget_tweaks',
     # For debugging
     #'debug_toolbar',
 
     # LOCAL
+    'mobile_otp',
 
     # For about and home page
     'pages.apps.PagesConfig',
-    
-    'mobile_otp',
 
     # For user profiles
     'profiles.apps.ProfilesConfig',
@@ -79,8 +71,7 @@ INSTALLED_APPS = [
     # # For Chat
     # 'mychatapp.apps.MychatappConfig'
     'chat',
- 
-  
+    
 
 ]
 
@@ -93,9 +84,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    
     # For debug_toolbar
     #'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
@@ -127,9 +115,9 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     "default": env.dj_db_url("DATABASE_URL")
-# }
+DATABASES = {
+    "default": env.dj_db_url("DATABASE_URL")
+}
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
@@ -140,12 +128,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 #         'PORT': '5432',
 #     }
 # }
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -235,58 +223,19 @@ INTERNAL_IPS = [
 ]
 # MESSAGE_STORAGE = 'django.contrib.messages.storage.base.BaseStorage'
 #provider auth
-# SOCIALACCOUNT_PROVIDERS = {
-#     'google': {
-#         'SCOPE': [
-#             'profile',
-#             'email',
-#         ],
-#         'AUTH_PARAMS': {
-#             'access_type': 'online',
-#         }
-#     }
-# }
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
 
-#provider github
-# SOCIALACCOUNT_PROVIDERS = {
-#     'github': {
-#         'APP': {
-#             'client_id': 'cd077d77842fa53beebb',
-#             'secret': '0179f2cb26a9a637a2254e33ab1f1aba54bc8f08',
-#             'key': ''
-#         }
-#     }
-# }
-
-# settings.py
 
 TWILIO_ACCOUNT_SID = 'ACa15c520f3c63eb4745384784262cd38d'
 TWILIO_AUTH_TOKEN = 'b36c3bef11f957dc63ec7a7ec4e50e99'
 TWILIO_PHONE_NUMBER = '+12316248749'
-
-CORS_ALLOWED_ORIGINS = [
-
-"http://localhost:8000",
-"http://127.0.0.1:8000"
-]
-
-CORS_ALLOW_METHODS = [
-'DELETE',
-'GET',
-'OPTIONS',
-'PATCH',
-'POST',
-'PUT',
-]
-
-CORS_ALLOW_HEADERS = [
-'accept',
-'accept-encoding',
-'authorization',
-'content-type',
-'dnt',
-'origin',
-'user-agent',
-'x-csrftoken',
-'x-requested-with',
-]

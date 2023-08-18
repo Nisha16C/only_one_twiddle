@@ -18,20 +18,27 @@
 
     {% if form.is_bound %}
       {% if field.errors %}
-        {% render_field field class="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-grey-darker border border-grey rounded bg-red-dark" %}
+        {% render_field field class="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal   text-white border border-grey rounded bg-red-dark" %}
         {% for error in field.errors %}
           <div class="inhidden mt-1 text-sm text-green">
             {{ error }}
           </div>
         {% endfor %}
       {% else %}
-        {% render_field field class="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-grey-darker border border-grey rounded bg-green-dark" %}
+        {% render_field field class="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal  text-white border border-grey rounded bg-green-dark" %}
       {% endif %}
     {% else %}
-      {% render_field field class="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-grey-darker border border-grey rounded" %}
+      {% render_field field class="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg text-white border border-grey rounded" %}
     {% endif %}
     {% if field.help_text %}
       <small class="block mt-1 text-grey">{{ field.help_text }}</small>
     {% endif %}
   </div>
 {% endfor %}
+
+<style>
+
+  .bg{
+    background-color: #4FA193;
+  }
+</style>

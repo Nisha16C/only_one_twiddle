@@ -64,11 +64,11 @@
                     Edit Profile
                       </button>
                       </a>
-                      <a href= {% url "register_phone_number" %}>
+                      <!-- <a href= {% url "register_phone_number" %}>
                         <button style="margin-right: 20px;" class="mt-3 flex justify-center  max-h-max whitespace-nowrap focus:outline-none  focus:ring  rounded max-w-max border bg-transparent border-blue-500 text-blue-500 hover:border-blue-800 hover:border-blue-800 flex items-center hover:shadow-lg font-bold py-2 px-4 rounded-full mr-0 ml-auto">
                           Add mobile number
                         </button>
-                      </a>
+                      </a> -->
                     </div>
                     {% else %}
                     <div class="flex flex-col text-right" style="margin-right: 20px;">
@@ -93,18 +93,18 @@
                     <!-- Description and others -->
                     <div class="mt-3">
                       <p class="text-white leading-tight mb-2">{{ obj_profile.bio }}</p>
-                      <div class="text-gray-600 flex">
+                      <div class="text-white flex">
                         <span class="flex mr-2"><svg viewBox="0 0 24 24" class="h-5 w-5 paint-icon"><g><path d="M19.708 2H4.292C3.028 2 2 3.028 2 4.292v15.416C2 20.972 3.028 22 4.292 22h15.416C20.972 22 22 20.972 22 19.708V4.292C22 3.028 20.972 2 19.708 2zm.792 17.708c0 .437-.355.792-.792.792H4.292c-.437 0-.792-.355-.792-.792V6.418c0-.437.354-.79.79-.792h15.42c.436 0 .79.355.79.79V19.71z"></path><circle cx="7.032" cy="8.75" r="1.285"></circle><circle cx="7.032" cy="13.156" r="1.285"></circle><circle cx="16.968" cy="8.75" r="1.285"></circle><circle cx="16.968" cy="13.156" r="1.285"></circle><circle cx="12" cy="8.75" r="1.285"></circle><circle cx="12" cy="13.156" r="1.285"></circle><circle cx="7.032" cy="17.486" r="1.285"></circle><circle cx="12" cy="17.486" r="1.285"></circle></g></svg> <span class="leading-5 ml-1">Joined {{ obj_profile.created|date:"F Y" }}</span></span>
                       </div>
                     </div>
                     <div class="pt-3 flex justify-start items-start w-full divide-x divide-gray-800 divide-solid">
                       <a href="{% url "profile_following" username=obj.username %}">
-                      <div class="text-center pr-3"><span class="font-bold text-white">{{ obj.following.count }}</span><span class="text-gray-600"> Following</span></div>
+                      <div class="text-center pr-3"><span class="font-bold text-white">{{ obj.following.count }}</span><span class="text-white"> Following</span></div>
                       </a>
                       <a href="{% url "profile_followers" username=obj.username %}">
                       <div class="text-center px-3">
                       <span id="fuck" class="font-bold text-white"> {{ obj.followers.count }} </span>
-                      <span class="text-gray-600"> Followers</span></div>
+                      <span class="text-white"> Followers</span></div>
                       </a>
                     </div>
                   </div>
@@ -199,9 +199,5 @@
 
 {% include "includes/tweet_form.html" %}
 
-<script>
-  function addmobile() {
-    const phone_number = window.promt("add your mobile number")
-  }
-</script>
+
 {% endblock content %}
