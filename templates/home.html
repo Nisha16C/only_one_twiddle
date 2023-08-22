@@ -15,7 +15,7 @@
     
         <main role="">
           <div  class="flex main" style="width: 990px;">
-            <section class="w-3/5 border border-y-0 border-gray-800 tweet" style="max-width:600px; scroll-behavior: smooth;">
+            <section class="w-3/5 border border-y-0 border-gray-800 tweet" style="max-width:433px; scroll-behavior: smooth;">
               <!--Content (Center)-->
               <aside>
                 <div class="flex">
@@ -108,7 +108,7 @@
                 </li>
                 {% empty %}
                 <div class="flex">
-                <h5 class="list text-lg py-8 pl-12  justify-center items-center  font-normal leading-normal mt-0 mb-2 text-white">
+                <h5 class="list text-sm py-8 pl-36 justify-center items-center text-2xl font-normal leading-normal mt-0 mb-2 text-white">
                   Nothing to show here.
                 </h5>
                 </div>
@@ -123,11 +123,8 @@
     </div>
 </div>
 {% include "includes/style.html" %}
-{% include "includes/style.html" %}
 
 {% include "includes/tweet_form.html" %}
-{% include "includes/mention_form.html" %}
-{% include "includes/retweet_form.html" %}
 <style>
 
  @media  (max-width: 500px)
@@ -174,11 +171,10 @@
       color: #66FCf1
     }
     .tweet_img{
-      object-fit: contain;
       border: 1px solid blue;
       border-radius: 10px;
-      width: 464px;
-      height: 246px;
+      width: 300px;
+      height: 200px
     }
   </style>
   

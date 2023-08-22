@@ -4,6 +4,10 @@
   notifications
 {% endblock title %}
 
+{% block scripts%}
+<script src="{% static "js/tweets/modal.js" %}" integrity="sha256-spBRsriuF+HutsrivZkESAXY2sXm1Avjw4lLyI8NXOU=" crossorigin="anonymous" defer></script>
+{% endblock scripts%}
+
 {% block content %}
 
 <div class="p-relative h-screen" >
@@ -47,8 +51,8 @@
               <!-- MENTION -->
               {% for mention_notification in mention_notifications %}
                 <div class="bg-dim-700 flex items-center justify-center px-2 py-2">
-                  <div class="w-full mx-auto rounded-lg bg-dim-700 shadow p-5 text-white" style="background-color: #45a29e;">
-                    <div class="w-full mb-4  rounded-lg" style="background-color: #2d5c54;">
+                  <div class="w-full mx-auto rounded-lg bg-dim-700 shadow p-5 text-white">
+                    <div class="w-full mb-4 bg-indigo-600 rounded-lg">
                       <p class="p-4 text-base leading-6 font-medium text-white">
                       @{{ mention_notification.user.username }} mention to your 
                       <span class="text-xs font-semibold inline-block py-1 px-1 uppercase rounded text-purple-600 bg-purple-200 uppercase last:mr-0 mr-1">
@@ -118,8 +122,8 @@
               {% endfor %}
               <!-- LIKE TWEET -->
               {% for like_tweet_notification in like_tweet_notifications %}
-              <div class="bg-dim-700 flex items-center justify-center px-2 py-2">
-                <div class="w-full mx-auto rounded-lg bg-dim-700 shadow p-5 text-white" style="background-color: #45a29e;">
+                <div class="bg-dim-700 flex items-center justify-center px-2 py-2">
+                  <div class="w-full mx-auto rounded-lg bg-dim-700 shadow p-5 text-white">
                     <div class="w-full mb-4 rounded-lg" style="background-color: #2d5c54;">
                       <p class="p-4 text-base leading-6 font-medium text-white">
                       @{{ like_tweet_notification.user.username }} like your
