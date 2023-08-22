@@ -9,7 +9,7 @@ class TweetForm(forms.ModelForm):
         model = Tweet
         fields = ('body', 'photo')
         widgets = {
-            'body': forms.Textarea(attrs={'rows': 5, 'placeholder': 'Whats hapening ... '}),
+            'body': forms.Textarea(attrs={'rows': 5, 'placeholder': 'Whats happening ... '}),
             'photo': forms.ClearableFileInput(attrs={'multiple': False, 'id': 'tweet_photo'} ),
             }
 
@@ -20,7 +20,7 @@ class MentionForm(forms.ModelForm):
         model = Mention
         fields = ('mention',)
         widgets = {'mention': forms.Textarea(
-            attrs={'rows': 5, 'placeholder': 'Whats hapening ... '})}
+            attrs={'rows': 5, 'placeholder': 'Whats happening ... '})}
 
 class RetweetForm(forms.ModelForm):
 
@@ -28,4 +28,4 @@ class RetweetForm(forms.ModelForm):
         model = Retweet
         fields = ('retweet',)
         widgets = {'retweet': forms.Textarea(
-            attrs={'rows': 5, 'placeholder': 'Whats hapening ... '})}
+            attrs={'rows': 5, 'placeholder': 'Whats happening ... '})}

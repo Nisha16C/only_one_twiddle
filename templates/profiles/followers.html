@@ -6,7 +6,7 @@
 
 {% block content %}
 
-<div class="p-relative h-screen" style="background-color: #15202b">
+<div class="p-relative h-screen" style="background-color: #2C3531">
     <div class="flex justify-center">
         {% include "includes/left_sidebar.html" %}
         <main role="main">
@@ -56,7 +56,7 @@
                 </a>
                 <div class="flex-1 px-4 py-2 m-2">
                   <a href="{{ person.get_absolute_url }}" class=" float-right">
-                    <button class="text-white font-semibold hover:text-white py-2 px-4 border border-white hover:border-transparent rounded-full {% if person not in request_user_following %}bg-transparent{% else %}bg-blue-600{% endif %}">
+                    <button class="btn_follow font-semibold  py-2 px-4 border border-white hover:border-transparent rounded-full {% if person not in request_user_following %}bg-transparent{% else %}bg-blue-600{% endif %}">
                       {% if person not in request_user_following %}
                         Follow
                       {% else %}
@@ -75,5 +75,18 @@
       </div>
   </div>
   {% include "includes/style.html" %}
-
+  <style>
+    btn_follow{
+      color: black;
+      border: 2px solid white;
+     background-color: #03968c;
+  
+  
+    }
+    .btn_follow:hover{
+      color: white;
+      border: 2px solid black;
+      background-color: #0b6b66;
+    }
+  </style>
   {% endblock content %}

@@ -6,7 +6,7 @@
 
 {% block content %}
 
-<div class="p-relative h-screen" style="background-color: #15202b">
+<div class="p-relative h-screen" style="background-color: #2C3531">
     <div class="flex justify-center">
         {% include "includes/left_sidebar.html" %}
         <main role="main">
@@ -24,12 +24,12 @@
               <div class="flex">
                 <a class="flex-1" href="{% url "profile_following" username=obj.username %}">
                 <div class="mx-2 rounded-sm bg-gray-700">
-                  <h2 class="px-4 py-2 text-xl font-semibold text-white">Following</h2>
+                  <h2 class="px-4 py-2 text-xl font-semibold text-white btn_follow">Following</h2>
                 </div>
                 </a>
                 <a class="flex-1" href="{% url "profile_followers" username=obj.username %}">
                 <div class="flex-1 mx-2 rounded-sm hover:bg-gray-700">
-                  <h2 class="px-4 py-2 text-xl font-semibold text-white">Followers</h2>
+                  <h2 class="px-4 py-2 text-xl font-semibold text-white btn_follow">Followers</h2>
                 </div>
                 </a>
               </div>
@@ -56,7 +56,7 @@
                 </a>
                 <div class="flex-1 px-4 py-2 m-2">
                   <a href="{{ person.get_absolute_url }}" class=" float-right">
-                    <button class="text-white font-semibold hover:text-white py-2 px-4 border border-white hover:border-transparent rounded-full {% if person not in request_user_following %}bg-transparent{% else %}bg-blue-600{% endif %}">
+                    <button class="btn_follow font-semibold hover:text-white py-2 px-4 border border-white hover:border-transparent rounded-full {% if person not in request_user_following %}bg-transparent{% else %}{% endif %}">
                       {% if person not in request_user_following %}
                       Follow
                       {% else %}
@@ -75,5 +75,18 @@
       </div>
   </div>
   {% include "includes/style.html" %}
+<style>
+  btn_follow{
+    color: black;
+    border: 2px solid white;
+   background-color: #03968c;
 
+
+  }
+  .btn_follow:hover{
+    color: white;
+    border: 2px solid black;
+    background-color: #0b6b66;
+  }
+</style>
   {% endblock content %}

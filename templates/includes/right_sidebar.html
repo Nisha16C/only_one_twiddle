@@ -1,124 +1,119 @@
-<aside class="w-2/5 h-12 position-relative ml-4">
+<aside class="w-2/5 h-12 position-relative">
 
-  <!--Aside menu (right side)-->
-  <div style="max-width:350px;">
-    <div class="overflow-y-auto fixed  h-screen">
-      <form action="{% url "search" %}"  method="GET" class="relative text-gray-300 w-80 p-5">
-        <button type="submit" class="absolute ml-4 mt-3 mr-4">
-          <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve" width="512px" height="512px">
-            <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z"></path>
-          </svg>
-        </button>
-        <input type="search" name="search" placeholder="Search " class=" search-clr h-10 px-10 pr-5 w-full rounded-full text-sm focus:outline-none bg-purple-white shadow rounded border-0">
-      </form>
-      <!--trending tweet section-->
-      <!-- <div class="max-w-sm rounded-lg bg-dim-700 overflow-hidden shadow-lg m-4">
-        <div class="flex">
-          <div class="flex-1 m-2">
-            <h2 class="px-4 py-2 text-xl w-48 font-semibold text-white">Trends</h2>
-          </div>
-          <div class="flex-1 px-4 py-2 m-2">
-          </div>
-        </div>
-        <hr class="border-gray-800"> -->
-        <!--first trending tweet-->
-        <!-- <div class="flex">
-          <div class="flex-1">
-            <p class="px-4 ml-2 mt-3 w-48 text-xs text-gray-400">1 . Trending</p>
-            <h2 class="px-4 ml-2 w-48 font-bold text-white">#Microsoft363</h2>
-            <p class="px-4 ml-2 mb-3 w-48 text-xs text-gray-400">5,466 Tweets</p>
-          </div>
-        </div>
-        <hr class="border-gray-800">
-      </div> -->
-      {% if suggestion %}
-      <!--people suggestion to follow section-->
-      <div class="max-w-sm rounded-lg   overflow-hidden shadow-lg m-4" style="background-color: #45a29e";>
-        <div class="flex">
-          <div class="flex-1 m-2">
-            <h2 class="px-4 py-2 text-xl w-48 font-semibold text-white">Who to follow</h2>
-          </div>
-        </div>
-        <hr class="border-gray-800">
-        {% for p in suggestion %}
-        <!--first person who to follow-->
-        <div class="flex flex-shrink-0">
-          <div class="flex-1 ">
-            <div class="flex items-center w-48">
-              <div>
-                <img class="inline-block h-10 w-10 rounded-full ml-4 mt-2" src="{{ p.profile.avatar.url }}" alt="">
-              </div>
-              <div class="ml-3 mt-3">
-                <p class="text-base leading-6 font-medium text-white">
-                {{ p.first_name|default:p.username|capfirst }}
-                </p>
-                <p class="text-sm roption leading-5 font-medium  group-hover:text-gray-300 transition ease-in-out duration-150">
-                @{{ p.username }}
-                </p>
-              </div>
+    <!--Aside menu (right side)-->
+    <div style="max-width:350px;">
+      <div class="overflow-y-auto fixed  h-screen">
+        <form action="{% url "search" %}"  method="GET" class="relative text-gray-300 w-80 p-5">
+          <button type="submit" class="absolute ml-4 mt-3 mr-4">
+            <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve" width="512px" height="512px">
+              <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z"></path>
+            </svg>
+          </button>
+          <input type="search" name="search" placeholder="Search " class=" search-clr h-10 px-10 pr-5 w-full rounded-full text-sm focus:outline-none bg-purple-white shadow rounded border-0">
+        </form>
+        <!--trending tweet section-->
+        <!-- <div class="max-w-sm rounded-lg bg-dim-700 overflow-hidden shadow-lg m-4">
+          <div class="flex">
+            <div class="flex-1 m-2">
+              <h2 class="px-4 py-2 text-xl w-48 font-semibold text-white">Trends</h2>
+            </div>
+            <div class="flex-1 px-4 py-2 m-2">
             </div>
           </div>
-          <div class="flex-1 px-4 py-2 m-2">
-            <a href="{{ p.get_absolute_url }}" class=" float-right">
-              <button class="bg-transparent hover:bg-gray-800 text-white font-semibold hover:text-white py-2 px-4 border border-white hover:border-transparent rounded-full">
-                View
-              </button>
-            </a>
+          <hr class="border-gray-800"> -->
+          <!--first trending tweet-->
+          <!-- <div class="flex">
+            <div class="flex-1">
+              <p class="px-4 ml-2 mt-3 w-48 text-xs text-gray-400">1 . Trending</p>
+              <h2 class="px-4 ml-2 w-48 font-bold text-white">#Microsoft363</h2>
+              <p class="px-4 ml-2 mb-3 w-48 text-xs text-gray-400">5,466 Tweets</p>
+            </div>
+          </div>
+          <hr class="border-gray-800">
+        </div> -->
+        {% if suggestion %}
+        <!--people suggestion to follow section-->
+        <div class="max-w-sm rounded-lg   overflow-hidden shadow-lg m-4" style="background-color: #45a29e";>
+          <div class="flex">
+            <div class="flex-1 m-2">
+              <h2 class="px-4 py-2 text-xl w-48 font-semibold text-black">Who to follow</h2>
+            </div>
+          </div>
+          <hr class="border-gray-800">
+          {% for p in suggestion %}
+          <!--first person who to follow-->
+          <div class="flex flex-shrink-0">
+            <div class="flex-1 ">
+              <div class="flex items-center w-48">
+                <div>
+                  <img class="inline-block h-10 w-10 rounded-full ml-4 mt-2" src="{{ p.profile.avatar.url }}" alt="">
+                </div>
+                <div class="ml-3 mt-3">
+                  <p class="text-base leading-6 font-medium text-white">
+                  {{ p.first_name|default:p.username|capfirst }}
+                  </p>
+                  <p class="text-sm leading-5 font-medium text-black group-hover:text-gray-300 transition ease-in-out duration-150">
+                  @{{ p.username }}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="flex-1 px-4 py-2 m-2">
+              <a href="{{ p.get_absolute_url }}" class=" float-right">
+                <button class="bg-transparent hover:bg-gray-800 text-white font-semibold hover:text-white py-2 px-4 border border-white hover:border-transparent rounded-full">
+                  View
+                </button>
+              </a>
+            </div>
+          </div>
+          <hr class="border-gray-800">
+          {% endfor %}
+        </div>
+
+        <div class="relative  ml-4 p-auto" style="background-color: #1f2833; width: 314px; border-radius: 7px;">
+          <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="user-list mb-2 text-white  hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5  inline-flex dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+            See all users
+          </button>
+          <!-- Dropdown menu -->
+          <div id="dropdown" class="bg-gray-800 z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700">
+            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+              {% for user in all_user_suggestion %}
+                <li>
+                  <a href="{% url 'profile' user.username %}" class="text-white block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ user.username }}</a>           
+                </li>
+              {% endfor %}
+            </ul>
           </div>
         </div>
-        <hr class="border-gray-800">
-        {% endfor %}
-        {% endif %}
-      </div>
-
-      <!-- See user list section  -->
-      <div class="relative  ml-4 p-auto" style="background-color: #1f2833; width: 312px; border-radius: 7px;">
-        <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="user-list mb-2 text-white  hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5  inline-flex dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-          See all users
-        </button>
-        <!-- Dropdown menu -->
-        <div id="dropdown" class="bg-gray-800 z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700">
-          <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-            {% for user in all_user_suggestion %}
-              <li>
-                <a href="{% url 'profile' user.username %}" class="text-white block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ user.username }}</a>           
-              </li>
-            {% endfor %}
-          </ul>
-        </div>
+	{% endif %}
       </div>
     </div>
-  </div>
+    
+  </aside>
   
-</aside>
-
-
-<style>
-   .search-clr{
-    background-color: #0b0c10;
-   }
- 
-.roption{
-  color: #000000;
-}
-
-</style>
-
-<script>
-  const dropdownToggle = document.getElementById("dropdownDefaultButton");
-  const dropdownMenu = document.getElementById("dropdown");
-
-  dropdownToggle.addEventListener("click", () => {
-    dropdownMenu.classList.toggle("hidden");
-  });
-
-  // Close the dropdown when clicking outside of it
-  window.addEventListener("click", (event) => {
-    if (!dropdownToggle.contains(event.target) && !dropdownMenu.contains(event.target)) {
-      dropdownMenu.classList.add("hidden");
+  
+  <style>
+     .search-clr{
+      background-color: #0b0c10;
+     }
+    .user-list{
+      
     }
-  });
-</script>
-
-
-
+  </style>
+  
+  <script>
+    const dropdownToggle = document.getElementById("dropdownDefaultButton");
+    const dropdownMenu = document.getElementById("dropdown");
+  
+    dropdownToggle.addEventListener("click", () => {
+      dropdownMenu.classList.toggle("hidden");
+    });
+  
+    // Close the dropdown when clicking outside of it
+    window.addEventListener("click", (event) => {
+      if (!dropdownToggle.contains(event.target) && !dropdownMenu.contains(event.target)) {
+        dropdownMenu.classList.add("hidden");
+      }
+    });
+  </script>
+  
