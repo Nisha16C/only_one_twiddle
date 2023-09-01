@@ -1,17 +1,17 @@
 {% load static %}
 {% block content %}
-    <div class="container" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; padding: 12px; background-color: #15202b; font-family: 'Courier New', Courier, monospace;">
+    <div class="container" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; padding: 12px; background-color: #2c3531; font-family: 'Courier New', Courier, monospace;">
         <div class="header" style="display: flex; justify-content: flex-start; align-items: center; margin-bottom: 20px;">
-            <a href="{% url 'home' %}" class="home-link" style="box-shadow: 2px 5px 7px  #090909; text-decoration: none; font-size: 20px; background-color: #60a5fa; border-radius: 30px; display: flex; align-items: center; color: white; padding: 10px;">
+            <a href="{% url 'home' %}" class="home-link" style="box-shadow: 2px 5px 7px  #090909; text-decoration: none; font-size: 20px; background-color: #45a29e; border-radius: 30px; display: flex; align-items: center; color: white; padding: 10px;">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
                     <path d="M9 19v-6h6v6h5v-8h3L12 3 1 11h3v8z"/>
                 </svg>
                 Home
             </a>
-            <h3 class="receiver-username" style="padding: 0 0 0 10px; margin: 0; margin-left: 45%; font-size: 20px; color: #60a5fa;">{{ receiver.username }}</h3>
+            <h3 class="receiver-username" style="padding: 0 0 0 10px; margin: 0; margin-left: 45%; font-size: 20px; color: #45a29e;">{{ receiver.username }}</h3>
         </div>
         {% if receiver %}
-            <div  class="chat-container" style="box-shadow: 1px 1px 5px 5px  #090909; width: 80%; max-width: 800px; margin: 0 auto; border-radius: 20px; border: #15202b; height: calc(100% - 200px); overflow-y: scroll; padding: 12px; scroll-behavior: smooth;">
+            <div  class="chat-container" style="box-shadow: 1px 1px 5px 5px  #090909; width: 80%; max-width: 800px; margin: 0 auto; border-radius: 20px; border: #2c3531; height: calc(100% - 200px); overflow-y: scroll; padding: 12px; scroll-behavior: smooth;">
                 <div class="push"></div>
                 <div style="margin-bottom: 10px;"></div> <!-- Add this empty div to push the latest chat to the bottom -->
                 {% for message in messages %}
@@ -21,7 +21,7 @@
                                 <img class="chat-image" src="{{ message.image.url }}" style="justify-content: right; max-width: 200px; max-height: 200px;">
                             {% endif %}
                             <br>
-                            <p class="chat-message-right" style="box-shadow: 2px 1px 8px  #090909; padding: 10px; border-radius: 20px; display: inline-block; max-width: 45%; word-wrap: break-word; background-color: #2b3e51; color: white; font-size: 18px;">
+                            <p class="chat-message-right" style="box-shadow: 2px 1px 8px  #090909; padding: 10px; border-radius: 20px; display: inline-block; max-width: 45%; word-wrap: break-word; background-color: #2c3531; color: white; font-size: 18px;">
                                 {% autoescape off %}
                                     {{ message.content | urlize }} <!-- Apply the urlize filter to convert URLs into clickable links -->
                                 {% endautoescape %}
@@ -35,7 +35,7 @@
                                 <img class="chat-image" src="{{ message.image.url }}" style="justify-content: left; max-width: 200px; max-height: 200px;">
                             {% endif %}
                             <br>
-                            <p class="chat-message-left" style="box-shadow: 2px 1px 18px #090909; padding: 10px; border-radius: 20px; display: inline-block; max-width: 45%; word-wrap: break-word; background-color: #60a5fa; color: white; font-size: 18px;">
+                            <p class="chat-message-left" style="box-shadow: 2px 1px 18px #090909; padding: 10px; border-radius: 20px; display: inline-block; max-width: 45%; word-wrap: break-word; background-color: #45a29e; color: white; font-size: 18px;">
                                 {% autoescape off %}
                                     {{ message.content | urlize }} <!-- Apply the urlize filter to convert URLs into clickable links -->
                                 {% endautoescape %}
@@ -46,15 +46,15 @@
                     {% endif %}
                 {% endfor %}
             </div>
-            <form method="post" action="{% url 'send_message' receiver.id %}" class="message-form" style="position: sticky; bottom: 0; padding: 12px;" enctype="multipart/form-data">
-                <div class="message-input-container" style="display: flex;">
+            <form method="post" action="{% url 'send_message' receiver.id %}" class="message-form" style="position: relative; padding: 12px;" enctype="multipart/form-data">
+                <div class="message-input-container" style="display: flex; align-items: center; justify-content: space-between;">
                     {% csrf_token %}
-                    <textarea class="message-input" style=" box-shadow: 10px 5px 5px #090909; flex: 1; margin-right: 10px; margin-left: 10px; border: 3px solid #60a5fa; border-radius: 25px; padding: 10px; color: rgb(34, 33, 33); font-size: 18px;" name="content" placeholder="Type your message here" required></textarea>
+                    <textarea class="message-input" style="box-shadow: 10px 5px 5px #090909; flex: 1; margin-right: 10px; margin-left: 10px; border: 3px solid #45a29e; border-radius: 25px; padding: 10px; color: rgb(34, 33, 33); font-size: 18px; resize: none;" name="content" placeholder="Type your message here" required></textarea>
                     <label class="image-upload-label" for="file-input" style="margin-left: 5px; margin-right: 10px; cursor: pointer;">
-                        <i class="fas fa-image image-icon" style="color: #60a5fa; font-size: 30px; margin-top: 10px;"></i>
-                        <input id="file-input" type="file" name="image" accept="image/*" style="display: none;"> <!-- Hide the file input element -->
+                        <i class="fas fa-image image-icon" style="color: #45a29e; font-size: 30px; margin-top: 10px;"></i>
+                        <input id="file-input" type="file" name="image" accept="image/*" style="display: none;">
                     </label>
-                    <input class="send-button" type="submit" value="Send" style="box-shadow: 10px 5px 5px #090909; padding: 10px 20px; background-color: #60a5fa; color: white; border: none; border-radius: 30px; cursor: pointer;">
+                    <input class="send-button" type="submit" value="Send" style="box-shadow: 10px 5px 5px #090909; padding: 10px 20px; background-color: #45a29e; color: white; border: none; border-radius: 30px; cursor: pointer;">
                 </div>
             </form>
         {% else %}
@@ -63,8 +63,9 @@
     </div>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
+        .chat-container { box-shadow: 1px 1px 5px 5px #090909; width: 80%; max-width: 800px; margin: 0 auto; border-radius: 20px; border: 1px solid #15202b; /* Add a solid border */ height: calc(100% - 200px); overflow-y: scroll; padding: 12px; scroll-behavior: smooth; } /* Customize the scrollbar */ .chat-container::-webkit-scrollbar { width: 10px; /* Width of the scrollbar */ } /* Track (the background of the scrollbar) */ .chat-container::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 5px; } /* Handle (the draggable part of the scrollbar) */ .chat-container::-webkit-scrollbar-thumb { background: #888; border-radius: 5px; } /* Handle on hover */ .chat-container::-webkit-scrollbar-thumb:hover { background: #555; }
         .chat-message-right a{
-            color: #60a5fa; /* Change link color to your preference */
+            color: #45a29e; /* Change link color to your preference */
             text-decoration: underline; /* Add underline to indicate it's a link */
             cursor: pointer;
         }
@@ -98,22 +99,24 @@
         /* Ensure the button sticks to the bottom */
         .message-input-container {
             position: relative;
-            display: flex;
-            flex-wrap: wrap; /* Wrap elements if they exceed the container width */
-            align-items: flex-end; /* Align items to the bottom */
+            /* display: flex;
+            flex-wrap: wrap;
+            align-items: flex-end;  */
         }
 
         .message-input {
             flex: 1; /* Allow textarea to grow and occupy the available space */
             margin-right: 10px;
             margin-left: 10px;
-            border: 3px solid #60a5fa;
+            border: 3px solid #45a29e;
             border-radius: 25px;
             padding: 10px;
             color: rgb(34, 33, 33);
             font-size: 18px;
             resize: none; /* Prevent textarea resizing */
             min-height: 40px; /* Set a minimum height for the textarea */
+            max-height: 120px;
+            overflow: auto;
         }
 
         .image-upload-label {
@@ -124,7 +127,7 @@
 
         .send-button {
             padding: 10px 20px;
-            background-color: #60a5fa;
+            background-color: #45a29e;
             color: white;
             border: none;
             border-radius: 30px;

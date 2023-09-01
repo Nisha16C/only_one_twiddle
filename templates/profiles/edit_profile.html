@@ -10,8 +10,8 @@
     <div class="flex justify-center">
         {% include "includes/left_sidebar.html" %}
         <main role="main">
-          <div class="flex" style="width: 990px;">
-            <section class="w-8/12 border border-y-0 border-gray-800" style="max-width:800px;">
+          <div class="flex main" style="width: 990px;">
+            <section class="w-8/12 border border-y-0 border-gray-800" style="max-width:800px; scroll-behavior: smooth;">
               <!--Content (Center)-->
               <aside>
                 <div class="flex">
@@ -36,11 +36,44 @@
                 </form>
                 </div>
                 </section>
-                {% include "includes/right_sidebar.html" %}
+                <div class="right-sidebar">
+                  {% include "includes/right_sidebar.html" %}
+                </div>
+                
             </div>
           </main>
       </div>
   </div>
   {% include "includes/style.html" %}
+  <style>
+    @media  (max-width: 500px)
+    { 
+      
+      .main {
+          flex-direction: column;
+          align-items: center; 
+      }
 
+      .right-sidebar {
+          display: none;
+      }
+      section{max-width: 645px;}
+
+      img{
+        width: 200px;
+        height: 200px;
+      }
+      .text-sm{
+        font-size: 25px;
+      }
+      .text-lg{
+        font-size: 35px
+      }
+      .svg-lg{
+        width: 35px;
+        height: 35px;
+      }
+  
+    } 
+  </style>
   {% endblock content %}

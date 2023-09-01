@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block scripts%}
-<script src="{% static "js/tweets/modal.js" %}"  crossorigin="anonymous" defer></script>
+<script src="{% static "js/tweets/modal.js" %}" integrity="1U5lBtP71qq2HImJIeV7MGf5GqiJvGaMdDzhvn6MFHU=" crossorigin="anonymous" defer></script>
 {% endblock scripts%}
 
 {% block content %}
@@ -11,7 +11,7 @@
     <div class="flex justify-center">
         {% include "includes/left_sidebar.html" %}
         <main role="main">
-          <div class="flex" style="width: 990px;">
+          <div class="flex main" style="width: 990px;">
             <section class="w-3/5 border border-y-0 border-gray-800" style="max-width:600px;">
               <!--Content (Center)-->
               <aside>
@@ -57,9 +57,11 @@
                     </div>
                     <div class="pl-16">
                       <a href="{% url "tweet_detail" tweet.id %}">
-                      <p class="text-base width-auto font-small list flex-shrink">
-                      {{ tweet.body }}
-                      </p>
+                        <div class="tweet_body ">
+                          <p class="text-sm tweet_content text-base width-auto font-small list flex-shrink">
+                          {{ tweet.body }}
+                          </p>
+                        </div>
                       </a>
                       <!-- <div class="md:flex-shrink pr-6 pt-3"> -->
                       <!--   <div class="bg-cover bg-no-repeat bg-center rounded-lg w-full h-64" style="height: 200px; background-image: url(https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=448&amp;q=80);"> -->
@@ -109,7 +111,9 @@
               {% endfor %}
               </ul>
               </section>
+              <div class="right-sidebar">  
               {% include "includes/right_sidebar.html" %}
+            </div>
           </div>
         </main>
     </div>
@@ -133,6 +137,47 @@
       width: 464px;
       height: 246px;
     }
+    .tweet_body{
+      
+      background-color: #0a1624;
+      width: 447px;
+      border-radius: 5px;
+      padding-bottom: 5px;
+    }
+    .tweet_content{
+      margin: 10px;
+      
+    }  
+ 
+    @media  (max-width: 500px)
+    { 
+      
+      .main {
+          flex-direction: column;
+          align-items: center; 
+      }
+
+      .right-sidebar {
+          display: none;
+      }
+      section{max-width: 645px;}
+
+      img{
+        width: 200px;
+        height: 200px;
+      }
+      .text-sm{
+        font-size: 25px;
+      }
+      .text-lg{
+        font-size: 35px
+      }
+      .svg-lg{
+        width: 35px;
+        height: 35px;
+      }
+  
+    } 
   
 </style>
 {% endblock content %}

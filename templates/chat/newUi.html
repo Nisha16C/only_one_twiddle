@@ -1,0 +1,341 @@
+{% comment %} {% extends 'chatUi.html' %} {% endcomment %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+ 
+    <div class="chat-box" style="width: 700px;">
+        <div class="header" style=" background-color: #858d89;">
+            <div class="avatar-wrapper avatar-big">
+                <!-- Avatar image -->
+            </div>
+            <span class="name">{{ receiver.username }}</span>
+            <span class="options">
+                <i class="fas fa-ellipsis-h"></i>
+            </span>
+        </div>
+        {% if receiver %}
+        {% comment %} {{ messages}} {% endcomment %}
+        {% comment %} {{ receiver.username }} {% endcomment %}
+        <div class="chat-room" style="overflow-y: scroll;  scroll-behavior: smooth; height: 600px; background-color: #424443;">
+          {% for message in messages %}
+          
+            {% if message.sender == request.user %}
+            
+                 <div class="message message-right">
+                        <div class="avatar-wrapper avatar-small">
+                            {% comment %} <img src="{{ message.sender.profile.avatar.url }}" alt="avatar" /> {% endcomment %}
+                        </div>
+                        {% if message.image %}
+                        <img class="chat-image" src="{{ message.image.url }}" style="justify-content: left; max-width: 200px; max-height: 200px;">
+                    {% endif %}
+                    <br>
+                        <div class="bubble bubble-dark">
+                          {% autoescape off %}
+                            {{ message.content | urlize }} 
+                          {% endautoescape %}
+                          
+                        </div>
+                         <span class="chat-timestamp" style="font-size: 12px; color: gray; display: block;  text-align: right; padding: 2px; ">
+                                {{ message.timestamp }}
+                          </span>
+                  </div>
+          {% else %}
+          
+                    <div class="message message-left">
+                        <div class="avatar-wrapper avatar-small">
+                            {% comment %} <img src="{{ message.sender.profile.avatar.url }}" alt="avatar" /> {% endcomment %}
+                        </div>
+                        {% if message.image %}
+                        <img class="chat-image" src="{{ message.image.url }}" style="justify-content: left; max-width: 200px; max-height: 200px;">
+                    {% endif %}
+                    <br>
+                        <div class="bubble bubble-light">
+                        {% autoescape off %}
+                          {{ message.content | urlize }} 
+                        {% endautoescape %}
+                        </div>
+                        <span class="chat-timestamp" style="font-size: 12px; color: gray; display: block;  text-align: right; padding: 2px; ">
+                          {{ message.timestamp }}
+                    </span>
+                    </div>
+                    {% endif %}
+          {% endfor %}
+        </div>
+       
+        
+          <form method="post" action="{% url 'send_message' receiver.id %}" class="message-form" style="position: sticky; bottom: 0; padding: 12px;" enctype="multipart/form-data">
+            <div class="message-input-container" style="display: flex;">
+                {% csrf_token %}
+                <input class="message-input" style=" background-color: #858d89; flex: 1; margin-right: 10px; margin-left: 10px; border: 1px solid #45a29e; border-radius: 25px; padding: 10px; color: black; font-size: 18px;" name="content" placeholder="Type your message here" required></input>
+                <label class="image-upload-label" for="file-input" style="margin-left: 5px; margin-right: 10px; cursor: pointer;">
+                        <i class="fa fa-image image-icon" style="color: #858d89; font-size: 30px; margin-top: 10px;"></i>
+                        <input id="file-input" type="file" name="image" accept="image/*" style="display: none;">
+                </label>
+                <input class="send-button" type="submit" value="Send" style=" padding: 5px 5px;
+                background-color: #858d89; color: white; border: none; border-radius: 30px; cursor: pointer;
+                 ">
+            </div>
+        </form>
+         
+        {% else %}
+          <p style="text-align: center;">Select a user to start a conversation.</p>
+        {% endif %}
+    
+   
+         
+  </body>
+  </html>                    
+  <script src="https://kit.fontawesome.com/faa629c1cc.js"  crossorigin="anonymous"></script>
+  <!-- Jquery -->
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>  </body>
+
+
+
+<style>
+/* Colors */
+:root {
+  --blue: #2c3531;
+  --light-violet: #fbcffc;
+  --violet: #2c3531;
+  --gray: #f7f9fb;
+}
+
+/* Global styles */
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--blue);
+  display: flex;
+}
+
+html,
+body,
+input,
+button {
+  font-family: "Sen", sans-serif;
+}
+
+i:hover {
+  color: var(--violet);
+}
+
+.d-none {
+  display: none !important;
+}
+
+.others-show {
+  top: -55px !important;
+  z-index: 10 !important;
+}
+
+
+
+/* Reset default styles for form elements */
+button {
+  border: 0;
+  outline: none;
+}
+
+img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.avatar-wrapper {
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+/* Chat box styles */
+.chat-box {
+  width: 350px;
+  margin: auto;
+}
+
+.chat-box .header {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 20px 20px 0 0;
+  padding: 15px;
+}
+
+.chat-box .header .avatar-big {
+  width: 35px;
+  height: 35px;
+}
+
+.chat-box .header .name {
+  margin-left: 20px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.chat-box .header .options {
+  font-size: 20px;
+  color: #2c3531;
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.chat-box .chat-room {
+  min-height: 300px;
+  background-color: #f7f9fb;
+  padding: 15px;
+}
+
+.chat-box .chat-room .avatar-small {
+  width: 25px;
+  height: 25px;
+}
+
+.chat-box .chat-room .message {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-box .chat-room .message-left {
+  align-items: flex-start;
+}
+
+.chat-box .chat-room .message-left .bubble {
+  border-radius: 0 5px 5px 5px;
+}
+
+.chat-box .chat-room .message-right {
+  align-items: flex-end;
+}
+
+.chat-box .chat-room .message-right .bubble {
+  border-radius: 5px 0 5px 5px;
+}
+
+.chat-box .chat-room .bubble {
+  padding: 10px;
+  font-size: 14px;
+  margin-top: 5px;
+  display: inline-block;
+}
+
+.chat-box .chat-room .bubble-light {
+  background-color: var(--light-violet);
+}
+
+.chat-box .chat-room .bubble-dark {
+  color: #fff;
+  background-color: var(--violet);
+}
+
+.chat-box .type-area {
+  display: flex;
+  height: 65px;
+  background-color: #fff;
+  border-radius: 0 0 20px 20px;
+}
+
+.chat-box .type-area .input-wrapper {
+  overflow: hidden;
+  border-radius: 0 0 0 20px;
+}
+
+.chat-box .type-area .input-wrapper input {
+  outline: none;
+  border: none;
+  padding-left: 20px;
+  height: 100%;
+  width: 220px;
+  font-size: 14px;
+}
+
+.chat-box .type-area .button-add {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.chat-box .type-area .button-add i {
+  font-size: 30px;
+  color: lightgrey;
+  cursor: pointer;
+}
+
+.chat-box .type-area .button-add i:hover {
+  color: var(--violet);
+}
+
+.chat-box .type-area .button-add .others {
+  display: flex;
+  padding: 10px 15px;
+  background-color: #fff;
+  position: absolute;
+  top: 5px;
+  z-index: -1;
+  right: -52px;
+  border-radius: 999px;
+  box-shadow: 0 0 25px -5px lightgray;
+  transition: 0.3s all ease-out;
+}
+
+.chat-box .type-area .button-add .others span i {
+  font-size: 20px;
+  color: var(--violet);
+}
+
+.chat-box .type-area .button-add .others span.image-button {
+  margin: 0 25px;
+}
+
+.chat-box .type-area .button-add .emoji-button {
+  position: relative;
+}
+
+.chat-box .type-area .button-add .emoji-button .emoji-box {
+  display: none;
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: 0;
+  right: 0;
+  transition: 0.3s all ease-out;
+}
+
+.chat-box .type-area .button-add .emoji-button span {
+  user-select: none;
+  cursor: pointer;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  width: 20px;
+  height: 20px;
+}
+
+.chat-box .type-area .button-send {
+  background-color: #fff;
+  margin-left: auto;
+  width: 65px;
+  color: var(--violet);
+  font-weight: bold;
+  border-left: 2px solid #f7f9fb;
+  border-radius: 0 0 20px 0;
+}
+
+.chat-box .type-area .button-send:hover {
+  background-color: var(--violet);
+  color: #fff;
+}
+</style>
+
+{% endblock %}

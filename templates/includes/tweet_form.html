@@ -50,3 +50,12 @@
     background-color: #0b6b66;
   }
 </style>
+
+<script>
+  function handleKeyDown(event) {
+      if (event.keyCode === 13) {
+          event.preventDefault(); // Prevent Enter from adding a new line in the textarea
+          document.getElementById('tweet-form').submit(); // Submit the form
+      }
+  }
+</script>

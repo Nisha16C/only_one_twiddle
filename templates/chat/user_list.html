@@ -1,6 +1,6 @@
 {% load static %}
 {% block content %}
-    <div class="container" style="text-align: center; background-color: #2C3531; font-family: 'Courier New', Courier, monospace; height: 100vh; display: flex; justify-content: center;">
+    <div class="container" style="text-align: center; background-color: #2C3531; height: 100vh; display: flex; justify-content: center;">
         <a href="{% url 'home' %}" style="box-shadow: 1px 3px 3px  #090909; position: absolute; top: 10; left: 10; text-decoration: none; font-size: 20px; margin-top: 20px; margin-left: 20px; background-color: #45a29e; border-radius: 30px; display: flex; align-items: center; color: white; padding: 10px;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
                 <path d="M9 19v-6h6v6h5v-8h3L12 3 1 11h3v8z"/>
@@ -8,8 +8,9 @@
             Home
         </a>
         <div>
+            
             <h2 class="user-list" style="padding: 20px 10px; font-size: 20px; color: #f9f7f7;"><b>Select a user to start a conversation.</b></h2>
-            <ul class="user-items" style="list-style-type: none; padding: 0;">
+            <ul class="user-items">
               {% for user in users %}
               
               
@@ -32,12 +33,54 @@
         </div>
     </div>
 <style>
+/* Add this CSS to your existing code */
+.user-items {
+  background-color: #5c5555;
+  list-style-type: none;
+  padding: 10px;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  height: 550px;
+
+  /* Style the scrollbar for Webkit-based browsers */
+  scrollbar-width: thin; /* Firefox - for cross-browser support */
+  scrollbar-color: var(--scroll-thumb) var(--scroll-track); /* Firefox */
+}
+
+ /* Customize the scrollbar */
+    .user-items::-webkit-scrollbar {
+        width: 10px; /* Width of the scrollbar */
+    }
+
+ 
+
+    /* Track (the background of the scrollbar) */
+    .user-items::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 5px;
+    }
+
+ 
+
+    /* Handle (the draggable part of the scrollbar) */
+    .user-items::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 5px;
+    }
+
+ 
+
+    /* Handle on hover */
+    .user-items::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+
 
     .msg_style{
         width: 25px;
         height: 25px;
         border: 1px solid black;
-/*        border-radius: 50%;*/
+        border-radius:  5px;
         background-color: green;
     }
    
@@ -90,7 +133,10 @@
             font-size: 18px;
             padding: 10px;
         }
+        .user-items::-webkit-scrollbar {   scrollbar-width: none; /* Set the width of the scrollbar */}  .user-items::-webkit-scrollbar {  display: none; /* Set the width of the scrollbar */}  .user-items::-webkit-scrollbar-thumb {   background-color: transparent; /* Make the thumb transparent */} .user-items::-webkit-scrollbar-track {   background-color: transparent; /* Make the track transparent */
+            
         }
+
 
         /* Medium screens */
         @media (min-width: 769px) and (max-width: 1024px) {

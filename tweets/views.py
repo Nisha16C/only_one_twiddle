@@ -15,6 +15,8 @@ from django.db.models import Count
 #from django.core.files import File
 
 
+from better_profanity import profanity
+
 @ajax_required
 @require_POST
 @login_required
@@ -22,6 +24,15 @@ def create_tweet(request):
     form = TweetForm(request.POST, request.FILES)
     if form.is_valid():
         author = get_user_model().objects.get(username=request.user.username)
+        
+        # Check for profanity in the tweet body
+        tweet_body = form.cleaned_data['body']
+        is_profanity = profanity.contains_profanity(tweet_body)
+        if is_profanity:
+            return JsonResponse({
+                'status': 'profanity'
+            })
+        
         instance = form.save(commit=False)
         instance.author = author
         instance.save()
@@ -32,6 +43,13 @@ def create_tweet(request):
     return JsonResponse({
         'status': 'fucked'
     })
+
+
+
+
+
+
+
 
 @ajax_required
 @require_POST

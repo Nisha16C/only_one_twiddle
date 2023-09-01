@@ -71,6 +71,7 @@ INSTALLED_APPS = [
     # # For Chat
     # 'mychatapp.apps.MychatappConfig'
     'chat',
+    'c_msg',
     
 
 ]

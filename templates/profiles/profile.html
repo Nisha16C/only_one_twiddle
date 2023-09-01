@@ -73,22 +73,39 @@
                     </div>
                     {% else %}
                     <div class="flex flex-col text-right" style="margin-right: 20px;">
-                      <button id="follow-button" data-url="{% url "user_follow" %}" 
-                      data-id="{{ obj.id }}" data-action="{% if request.user in obj.followers.all %} 
-                      un{% endif %}follow" 
-                      class="flex justify-center 
-                       max-h-max whitespace-nowrap focus:outline-none 
-                        focus:ring  rounded max-w-max border  
-                         flex items-center
-                         hover:shadow-lg font-bold py-2 px-4 rounded-full mr-0 ml-auto 
-                         {% if request.user not in obj.followers.all %}text-black 
-                         bg-transparent{% else %}text-white bg-blue-500{% endif %}  btn_follow" >
-                      {% if request.user not in obj.followers.all%}
+                    <button id="follow-button" data-url="{% url "user_follow" %}" 
+                      data-id="{{ obj.id }}" data-action="{% if request.user in obj.followers.all %}un{% endif %}follow" 
+                      class="flex justify-center max-h-max whitespace-nowrap focus:outline-none focus:ring rounded max-w-max border flex items-center hover:shadow-lg font-bold py-2 px-4 rounded-full mr-0 ml-2 {% if request.user not in obj.followers.all %}text-black bg-transparent{% else %}text-white bg-blue-500{% endif %} btn_follow">
+                  {% if request.user not in obj.followers.all%}
                       Follow
-                      {% else %}
+                  {% else %}
                       Following
-                      {% endif %}
+                  {% endif %}
+                    </button>
+                    
+
+
+<!--  Message box  -->
+                    
+                    {% if user != obj %}
+                    <div class="flex flex-col text-right" style="margin-right: 20px;">
+                      <a href={% url 'send_message' user.id  %}>
+                      <button id="message-button" class="btn_message flex justify-center max-h-max 
+                      whitespace-nowrap focus:outline-none focus:ring rounded max-w-max border 
+                      flex items-center hover:shadow-lg font-bold py-2 px-4 rounded-full 
+                      mr-0 ml-auto text-white bg-blue-500" style="margin-top: 10px;">
+                          Message
                       </button>
+                      </a>
+                   </div>
+                  {% endif %}
+
+                    <!-- Messaging Box (hidden by default) -->
+                    <div id="message-box" class="hidden">
+                      <!-- Add messaging form here -->
+                    </div>
+
+
                     </div>
                     {% endif %}
                   </div>
@@ -150,11 +167,6 @@
                       {{ tweet.body }}
                       </p>
                       </a>
-                      <!-- <div class="md:flex-shrink pr-6 pt-3"> -->
-                      <!--   <div class="bg-cover bg-no-repeat bg-center rounded-lg w-full h-64" style="height: 200px; background-image: url(https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=448&amp;q=80);"> -->
-                      <!--     <img class="opacity-0 w-full h-full" src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=448&amp;q=80" alt=""> -->
-                      <!--   </div> -->
-                      <!-- </div> -->
                       <div class="flex items-center py-4 pl-12">
                         <div class="flex-1 flex items-center text-white text-xs text-white-400 hover:text-blue-400 transition duration-350 ease-in-out">
                           <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
@@ -221,6 +233,19 @@
     border: 2px solid black;
     background-color: #0b6b66;
   }
+
+  .btn_message {
+    color: black;
+    border: 2px solid white;
+    background-color: #03968c;
+  }
+
+  .btn_message:hover {
+    color: white;
+    border: 2px solid black;
+    background-color: #0b6b66;
+  }
+
 </style>
 
 {% endblock content %}

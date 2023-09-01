@@ -1,6 +1,7 @@
 const tweetBtn = document.getElementById('create-tweet');
 const submitTweetBtn = document.getElementById('tweet-submit');
 const tweetForm = document.getElementById('tweet-form');
+
 const csrf_token = document.getElementsByName('csrfmiddlewaretoken');
 // const body = document.getElementById('id_body');
 // const photo = document.getElementById('tweet_photo');
@@ -37,6 +38,7 @@ if (mentionForm !== null) {
             },
             success: function (response) {
                 toggleModal('mention-modal');
+                window.location.reload();
                 tweetForm.reset();
             },
             error: function (error) {
@@ -66,6 +68,7 @@ if (retweetForm !== null) {
             },
             success: function (response) {
                 toggleModal('retweet-modal');
+                window.location.reload();
                 tweetForm.reset();
             },
             error: function (error) {
@@ -101,29 +104,35 @@ tweetBtn.addEventListener('click', function (e) {
     toggleModal('modal-id');
 })
 
+
+
+
 submitTweetBtn.addEventListener('click', function (e) {
-    e.preventDefault;
+    e.preventDefault();
     const formdata = new FormData(tweetForm);
     $.ajax({
         type: 'POST',
         url: '/compose/tweet/',
-        // data: {
-        //     'csrfmiddlewaretoken': csrf_token[0].value,
-        //     'body': body.value,
-        //     'photo': photo.value,
-        // },
+    
         data: formdata,
         processData: false,
         contentType: false,
         success: function (response) {
-            toggleModal('modal-id');
-            tweetForm.reset();
+            if (response.status === 'ok') {
+                toggleModal('modal-id');
+                window.location.reload();
+                tweetForm.reset();
+            } else if (response.status === 'profanity') {
+                alert("Your tweet contains profanity. Please use appropriate language.");
+            }
         },
         error: function (error) {
             alert("Oops something went wrong!");
         }
-    })
-})
+    });
+});
+
+
 
 function toggleModal(modalID) {
     document.getElementById(modalID).classList.toggle("hidden");

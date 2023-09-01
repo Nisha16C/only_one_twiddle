@@ -52,6 +52,6 @@ def send_message(request, user_id):
         return redirect('send_message', user_id=user_id)
 
     messages = chat.messages.order_by('timestamp') if chat else []
-    return render(request, 'chat/send_message.html', {'receiver': receiver, 'messages': messages})
+    return render(request, 'chat/newUi.html', {'receiver': receiver, 'messages': messages})
 
 

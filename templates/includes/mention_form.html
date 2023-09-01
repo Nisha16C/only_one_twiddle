@@ -25,7 +25,7 @@
         <button class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('mention-modal')">
           Close
         </button>
-        <button id="mention-submit" class="bg-blue-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
+        <button id="mention-submit" class="mention_clr text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
           mention
         </button>
       </div>
@@ -33,3 +33,16 @@
   </div>
 </div>
 <div class="hidden opacity-25 fixed inset-0 z-40 bg-black" id="mention-modal-backdrop"></div>
+<style>
+
+  .mention_clr{
+    background-color: #03968c;
+    border: 2px solid white;
+  }
+  .mention_clr:hover{
+    background-color: #66FCf1;
+    border: 2px solid  black;
+    color: black;
+  }
+  </style>
+  
