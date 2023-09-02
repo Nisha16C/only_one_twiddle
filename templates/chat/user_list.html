@@ -10,133 +10,129 @@
         <div>
             <h2 class="user-list" style="padding: 20px 10px; font-size: 20px; color: #f9f7f7;"><b>Select a user to start a conversation.</b></h2>
             <ul class="user-items">
-              {% for user in users %}
-              
-              
+                {% for user in users %}
                 <li style="margin-bottom: 15px;">
-                  <a class="user-link" href="{% url 'send_message' user.id %}" style="box-shadow: 1px 3px 3px  #090909; display: block; font-size: 18px; padding: 10px; background-color: #45a29e; border: 1px solid #ccc; border-radius: 50px; text-decoration: none; color: #f9f7f7;">
-                    <!-- <img src="{{ user.avatar.url }}" alt="{{ user.username }}" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 10px;"> -->
-                    {{ user.username }}
-                    {% if user.unread_count%}
-                    
-                    <span class="msg_style"> 
-                        <span class="design">{{ user.unread_count }}</span>
-                    </span>
-                    
-                     {% endif%} 
-                  </a>
-                </li> 
-              {% endfor %}
+                    <a class="user-link" href="{% url 'send_message' user.id %}" style="box-shadow: 1px 3px 3px  #090909; display: flex; align-items: center; font-size: 18px; padding: 10px; background-color: #45a29e; border: 1px solid #ccc; border-radius: 50px; text-decoration: none; color: #f9f7f7;">
+                        <img src="{{ user.avatar.url }}" alt="{{ user.username }}" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 10px;">
+                        {{ user.username }}
+                        {% if user.unread_count %}
+                        <span class="msg_style"> 
+                            <span class="design">{{ user.unread_count }}</span>
+                        </span>
+                        {% endif %}
+                    </a>
+                </li>
+                {% endfor %}
             </ul>
-           
-            
         </div>
     </div>
-<style>
-/* Add this CSS to your existing code */
-.user-items {
-  background-color: #5c5555;
-  list-style-type: none;
-  padding: 10px;
-  overflow-y: scroll;
-  scroll-behavior: smooth;
-  height: 550px;
+    <style>
+        /* Add this CSS to your existing code */
+        .user-items {
+            background-color: #5c5555;
+            list-style-type: none;
+            padding: 10px;
+            overflow-y: scroll;
+            scroll-behavior: smooth;
+            height: 550px;
 
-  /* Style the scrollbar for Webkit-based browsers */
-  scrollbar-width: thin; /* Firefox - for cross-browser support */
-  scrollbar-color: var(--scroll-thumb) var(--scroll-track); /* Firefox */
-}
-
- /* Customize the scrollbar */
-    .user-items::-webkit-scrollbar {
-        width: 10px; /* Width of the scrollbar */
-    }
-
- 
-
-    /* Track (the background of the scrollbar) */
-    .user-items::-webkit-scrollbar-track {
-        background: #f1f1f1;
-        border-radius: 5px;
-    }
-
- 
-
-    /* Handle (the draggable part of the scrollbar) */
-    .user-items::-webkit-scrollbar-thumb {
-        background: #888;
-        border-radius: 5px;
-    }
-
- 
-
-    /* Handle on hover */
-    .user-items::-webkit-scrollbar-thumb:hover {
-        background: #555;
-    }
-
-
-    .msg_style{
-        width: 25px;
-        height: 25px;
-        border: 1px solid black;
-        border-radius:  5px;
-        background-color: green;
-    }
-   
-    .user-link:hover{
-        box-shadow: 2px 3x 5px  white;
-    }
-    .design {
-/*        font-size: 10px;*/
-        animation: blink 1s infinite; /* Animation duration, infinite iteration */
-        color: #FF5733; /* Change color as you like */
-        
-      }
-      
-      @keyframes blink {
-        0%, 50%, 100% {
-          opacity: 1; /* Fully visible at 0%, 50%, and 100% */
+            /* Style the scrollbar for Webkit-based browsers */
+            scrollbar-width: thin; /* Firefox - for cross-browser support */
+            scrollbar-color: var(--scroll-thumb) var(--scroll-track); /* Firefox */
         }
-        25%, 75% {
-          opacity: 0; /* Invisible at 25% and 75% */
+
+        /* Customize the scrollbar */
+        .user-items::-webkit-scrollbar {
+            width: 10px; /* Width of the scrollbar */
         }
-      }
 
-     .text_color{
-        color: white;
-     }
-    .unread-count {
-        background-color: red;
-        color: white;
-        font-size: 12px;
-        padding: 3px 6px;
-        border-radius: 50%;
-        margin-left: 5px;
-    }
+        /* Track (the background of the scrollbar) */
+        .user-items::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 5px;
+        }
 
-            /* Responsive styles for different screen sizes */
+        /* Handle (the draggable part of the scrollbar) */
+        .user-items::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 5px;
+        }
+
+        /* Handle on hover */
+        .user-items::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        .msg_style {
+            width: 25px;
+            height: 25px;
+            border: 1px solid black;
+            border-radius: 5px;
+            background-color: green;
+        }
+
+        .user-link:hover {
+            box-shadow: 2px 3px 5px white;
+        }
+
+        .design {
+            animation: blink 1s infinite; /* Animation duration, infinite iteration */
+            color: #FF5733; /* Change color as you like */
+        }
+
+        @keyframes blink {
+            0%, 50%, 100% {
+                opacity: 1; /* Fully visible at 0%, 50%, and 100% */
+            }
+            25%, 75% {
+                opacity: 0; /* Invisible at 25% and 75% */
+            }
+        }
+
+        .text_color {
+            color: white;
+        }
+
+        .unread-count {
+            background-color: red;
+            color: white;
+            font-size: 12px;
+            padding: 3px 6px;
+            border-radius: 50%;
+            margin-left: 5px;
+        }
+
+        /* Responsive styles for different screen sizes */
 
         /* Small screens */
         @media (max-width: 768px) {
-        .container {
-            font-size: 16px;
-            padding: 20px;
-        }
+            .container {
+                font-size: 16px;
+                padding: 20px;
+            }
 
-        .user-list {
-            font-size: 20px;
-            margin-top: 50px;
-        }
+            .user-list {
+                font-size: 20px;
+                margin-top: 50px;
+            }
 
-        .user-link {
-            font-size: 18px;
-            padding: 10px;
-        }
-        .user-items::-webkit-scrollbar {   scrollbar-width: none; /* Set the width of the scrollbar */}  .user-items::-webkit-scrollbar {  display: none; /* Set the width of the scrollbar */}  .user-items::-webkit-scrollbar-thumb {   background-color: transparent; /* Make the thumb transparent */} .user-items::-webkit-scrollbar-track {   background-color: transparent; /* Make the track transparent */
-            
-        }
+            .user-link {
+                font-size: 18px;
+                padding: 10px;
+            }
 
+            .user-items::-webkit-scrollbar {
+                scrollbar-width: none; /* Hide the scrollbar */
+            }
+
+            .user-items::-webkit-scrollbar-thumb {
+                background-color: transparent; /* Make the thumb transparent */
+            }
+
+            .user-items::-webkit-scrollbar-track {
+                background-color: transparent; /* Make the track transparent */
+            }
+        }
 
         /* Medium screens */
         @media (min-width: 769px) and (max-width: 1024px) {
@@ -154,5 +150,5 @@
         @media (min-width: 1025px) {
             /* No specific changes for large screens */
         }
-</style>
+    </style>
 {% endblock %}
