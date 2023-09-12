@@ -26,6 +26,7 @@
                   </svg>
                   <span class="option"> Notifications</span>
               </a></li>
+              
               <li><a href="{% url "profile" username=user.username %}" class="list mt-1 group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-full hover:bg-gray-800 hover:text-blue-300">
                   <svg class="mr-4 h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
                       <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
@@ -37,62 +38,68 @@
                   <path d="M108.881,5.334C48.844,5.334,0,45.339,0,94.512c0,28.976,16.84,55.715,45.332,72.454 c-3.953,18.48-12.812,31.448-12.909,31.588l-9.685,13.873l16.798-2.153c1.935-0.249,47.001-6.222,79.122-26.942 c26.378-1.92,50.877-11.597,69.181-27.364c19.296-16.623,29.923-38.448,29.923-61.455C217.762,45.339,168.918,5.334,108.881,5.334z M115.762,168.489l-2.049,0.117l-1.704,1.145c-18.679,12.548-43.685,19.509-59.416,22.913c3.3-7.377,6.768-17.184,8.499-28.506 l0.809-5.292l-4.741-2.485C30.761,142.547,15,119.42,15,94.512c0-40.901,42.115-74.178,93.881-74.178s93.881,33.276,93.881,74.178 C202.762,133.194,164.547,165.688,115.762,168.489z"></path> </g></svg>                                  
                  <span class="option"> Message</span></a></li>
            
-              <li>
-              <div class="flex-shrink-0 flex hover:bg-blue-00 rounded-full p-4  mr-2 cursor-pointer">
-                <div x-data="{ open: false }" class="">
-                    <div @click="open = !open" :class="{'border-indigo-700 transform transition duration-300 ': open}" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100">
-                      <div class="flex items-center">
-                        <div>
-                          <img class="inline-block h-10 w-10 rounded-full" src="{{ user.profile.avatar.url }}" alt="" />
+                 <li>
+                  <div class="flex-shrink-0 flex hover:bg-blue-00 rounded-full p-4  mr-2 cursor-pointer">
+                    <div x-data="{ open: false }" class="">
+                      <div @click="open = !open" :class="{'border-indigo-700 transform transition duration-300 ': open}"
+                        x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75"
+                        x-transition:leave-start="transform opacity-100 scale-100">
+                        <div class="flex items-center">
+                          <div>
+                            <img class="inline-block h-10 w-10 rounded-full" src="{{ user.profile.avatar.url }}" alt="" />
+                          </div>
+                          <div class="ml-3 list">
+                            <p class="option list text-base leading-6 font-medium text-white">
+                              {{ user.first_name|default:user.username|capfirst }}
+                            </p>
+                            <p class="aoption  text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
+                              @{{ user.username }}
+                            </p>
+                          </div>
+                
                         </div>
-                        <div class="ml-3 list">
-                          <p class="option list text-base leading-6 font-medium text-white">
-                          {{ user.first_name|default:user.username|capfirst }}
-                          </p>
-                          <p class="aoption  text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
-                          @{{ user.username }}
-                          </p>
+                        <div x-show="open" x-transition:enter="transition ease-out duration-100"
+                          x-transition:enter-start="transform opacity-0 scale-95"
+                          x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75"
+                          x-transition:leave-start="transform opacity-100 scale-100"
+                          x-transition:leave-end="transform opacity-0 scale-95"
+                          class="absolute w-60 px-5 py-3 bg-gray-700 rounded-lg shadow border dark:border-transparent mt-5 dropdown-up">
+                          <ul class="space-y-3 dark:text-white">
+                            <li class="font-medium ">
+                              <a href="{% url "account_email" %}" class="flex items-center transform transition-colors duration-200 border-r-4 border-transparent hover:border-white">
+                                <div class="mr-3 text-lg text-blue-500">
+                                  <i class="fas fa-at"></i>
+                                </div>
+                                Email
+                              </a>
+                            </li>
+                            <li class="font-medium ">
+                              <a href="{% url "account_change_password" %}" class="flex items-center transform transition-colors duration-200 border-r-4 border-transparent hover:border-white">
+                                <div class="mr-3 text-lg">
+                                  <i class="fas fa-unlock"></i>
+                                </div>
+                                Change Password
+                              </a>
+                            </li>
+                            <hr class="dark:border-gray-700">
+                            <li class="font-medium text-red-600">
+                              <a href="{% url "account_logout" %}" class=" flex items-center transform transition-colors duration-200 border-r-4 border-transparent hover:border-red-600">
+                                <div class="mr-3 text-red-600">
+                                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                                </div>
+                                Logout
+                              </a>
+                            </li>
+                          </ul>
                         </div>
-
-                      </div>
-                      <div x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="absolute w-60 px-5 py-3 bg-gray-700 rounded-lg shadow border dark:border-transparent mt-5">
-                        <ul class="space-y-3 dark:text-white">
-                          <li class="font-medium ">
-                            <a href="{% url "account_email" %}" class="flex items-center transform transition-colors duration-200 border-r-4 border-transparent hover:border-white">
-                              <div class="mr-3 text-lg text-blue-500">
-                                <i class="fas fa-at"></i>
-                              </div>
-                              Email
-                            </a>
-                          </li>
-                          <li class="font-medium ">
-                            <a href="{% url "account_change_password" %}" class="flex items-center transform transition-colors duration-200 border-r-4 border-transparent hover:border-white">
-                              <div class="mr-3 text-lg">
-                                <i class="fas fa-unlock"></i>
-                              </div>
-                              Change Password
-                            </a>
-                          </li>
-                          <hr class="dark:border-gray-700">
-                          <li class="font-medium text-red-600">
-                            <a href="{% url "account_logout" %}" class=" flex items-center transform transition-colors duration-200 border-r-4 border-transparent hover:border-red-600">
-                              <div class="mr-3 text-red-600">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
-                              </div>
-                              Logout
-                            </a>
-                          </li>
-                        </ul>
                       </div>
                     </div>
-                </div>
-              </div> 
-          </li>
-
+                  </div>
+                </li>                
           </ul>
             
               <button id="create-tweet" class="tweet-clr hover:bg-blue-500 w-full mt-5 text-white font-bold py-2 px-4 rounded-full">
-                  Tweet
+                  Post
               </button>
           </nav>
       </div>
@@ -103,6 +110,11 @@
 
 
 <style>
+.dropdown-up {
+  bottom: 100%; /* Position above the trigger element */
+  transform-origin: top center; /* Set the transform origin to the top center */
+}
+
 
 @media  (max-width: 500px) {
 

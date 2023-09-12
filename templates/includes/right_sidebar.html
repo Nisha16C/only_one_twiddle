@@ -1,8 +1,9 @@
-<aside class="w-2/5 h-12 position-relative">
+<aside class="w-2/5 h-12 position-relative" >
 
     <!--Aside menu (right side)-->
     <div style="max-width:350px;">
       <div class="overflow-y-auto fixed  h-screen">
+        <div class="" >
         <form action="{% url "search" %}"  method="GET" class="relative text-gray-300 w-80 p-5">
           <button type="submit" class="absolute ml-4 mt-3 mr-4">
             <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve" width="512px" height="512px">
@@ -11,6 +12,8 @@
           </button>
           <input type="search" name="search" placeholder="Search " class=" search-clr h-10 px-10 pr-5 w-full rounded-full text-sm focus:outline-none bg-purple-white shadow rounded border-0">
         </form>
+      </div>
+
         <!--trending tweet section-->
         <!-- <div class="max-w-sm rounded-lg bg-dim-700 overflow-hidden shadow-lg m-4">
           <div class="flex">
@@ -31,9 +34,10 @@
           </div>
           <hr class="border-gray-800">
         </div> -->
+
         {% if suggestion %}
         <!--people suggestion to follow section-->
-        <div class="max-w-sm rounded-lg   overflow-hidden shadow-lg m-4" style="background-color: #45a29e";>
+        <div class="max-w-sm rounded-lg overflow-hidden shadow-lg m-4" style="background-color: #45a29e";>
           <div class="flex">
             <div class="flex-1 m-2">
               <h2 class="px-4 py-2 text-xl w-48 font-semibold text-black">Who to follow</h2>
@@ -93,6 +97,7 @@
   
   
   <style>
+ 
      .search-clr{
       background-color: #1f2833;
      }

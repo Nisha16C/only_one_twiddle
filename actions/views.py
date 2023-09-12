@@ -37,19 +37,6 @@ def notifications(request):
         .select_related('user')\
         .prefetch_related('target', 'target__author', 'target__author__profile')
 
-    # Retweet to tweet
-    # retweet_notifications = Action.objects.filter(target_ct=target_ct_tweet,
-    #                                               target_id__in=tweet_ids).exclude(verb='like tweet')\
-    #     .select_related('user', 'user__profile')
-    # # like retweet
-    # target_ct_retweet = ContentType.objects.get_for_model(Retweet)
-    # retweet_ids = request.user.retweets.values_list('id', flat=True)
-    # like_retweet_notifications = Action.objects.filter(target_ct=target_ct_retweet,
-    #                                                    target_id__in=retweet_ids,
-    #                                                    verb='like retweet')\
-    #     .select_related('user')\
-    #     .prefetch_related('target', 'target__author', 'target__author__profile')
-
     
 
     return render(request, 'actions/notifications.html', {'follow_notifications': follow_notifications,

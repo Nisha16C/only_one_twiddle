@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     # For full-text search
     'django.contrib.postgres',
+   
+    # 'csp',
     
     # 3RD PARTY
 
@@ -77,6 +79,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    # 'csp.middleware.CSPMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -85,6 +88,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
+
     # For debug_toolbar
     #'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
@@ -116,9 +121,9 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     "default": env.dj_db_url("DATABASE_URL")
-# }
+DATABASES = {
+    "default": env.dj_db_url("DATABASE_URL")
+}
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
@@ -129,12 +134,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 #         'PORT': '5432',
 #     }
 # }
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -240,3 +245,26 @@ SOCIALACCOUNT_PROVIDERS = {
 TWILIO_ACCOUNT_SID = 'ACa15c520f3c63eb4745384784262cd38d'
 TWILIO_AUTH_TOKEN = 'b36c3bef11f957dc63ec7a7ec4e50e99'
 TWILIO_PHONE_NUMBER = '+12316248749'
+
+
+SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_HTTPONLY = True
+
+
+
+# Make sure this setting is set to True to enable HTTPS for CSRF cookies.
+CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_HTTPONLY = True
+
+# csp rule added by ashish
+
+# CSP_DEFAULT_SRC = ("'self'", "kit.fontawesome.com", "code.jquery.com", "unpkg.com", "cdn.jsdelivr.net")
+
+# CSP_SCRIPT_SRC = (
+#     "'self'",
+#     "kit.fontawesome.com",
+#     "code.jquery.com",
+#     "unpkg.com",
+#     "cdn.jsdelivr.net",
+# )
+# CSP_REPORT_ONLY = False

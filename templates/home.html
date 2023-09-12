@@ -7,31 +7,55 @@
 
 {% block content %}
 
+ 
+
+<div class="preloader">
+
+  <img src="{% static "logo.png" %}" alt="Loader">
+
+</div>
+
+
 <div class="p-relative h-screen" >
     <div class="flex justify-center">
         <div class="left-sidebar">
           {% include "includes/left_sidebar.html" %}
         </div> 
     
-        <main role="">
+        <main role="" style="margin-top: 35px;">
           <div  class="flex main" style="width: 990px;">
-            <section class="w-3/5 border border-y-0 border-gray-800 tweet" style="max-width: 600px; scroll-behavior: smooth;">
+            <section class="w-3/5 border border-y-0 border-gray-800 tweet" style="max-width: 600px; scroll-behavior: smooth; border: 1px solid #0a1624">
               <!--Content (Center)-->
               <aside>
                 <div class="flex">
                   <div class="flex-1 mx-2">
+                    <div class="search px-4 py-2">
+                     
+                    </div>
                     <h2 class="text-sm px-4 py-2 text-xl font-semibold head_clr">Home</h2>
                   </div>
-                  <div class="flex-1 px-4 py-2 mx-2">
-                    <a href="" class=" text-2xl font-medium rounded-full text-white hover:bg-gray-800 hover:text-blue-300 float-right">
-                      <svg class="svg-lg m-2 h-6 w-6" fill="#66FCf1" viewBox="0 0 24 24">
-                        <g>
-                        <path d="M22.772 10.506l-5.618-2.192-2.16-6.5c-.102-.307-.39-.514-.712-.514s-.61.207-.712.513l-2.16 6.5-5.62 2.192c-.287.112-.477.39-.477.7s.19.585.478.698l5.62 2.192 2.16 6.5c.102.306.39.513.712.513s.61-.207.712-.513l2.16-6.5 5.62-2.192c.287-.112.477-.39.477-.7s-.19-.585-.478-.697zm-6.49 2.32c-.208.08-.37.25-.44.46l-1.56 4.695-1.56-4.693c-.07-.21-.23-.38-.438-.462l-4.155-1.62 4.154-1.622c.208-.08.37-.25.44-.462l1.56-4.693 1.56 4.694c.07.212.23.382.438.463l4.155 1.62-4.155 1.622zM6.663 3.812h-1.88V2.05c0-.414-.337-.75-.75-.75s-.75.336-.75.75v1.762H1.5c-.414 0-.75.336-.75.75s.336.75.75.75h1.782v1.762c0 .414.336.75.75.75s.75-.336.75-.75V5.312h1.88c.415 0 .75-.336.75-.75s-.335-.75-.75-.75zm2.535 15.622h-1.1v-1.016c0-.414-.335-.75-.75-.75s-.75.336-.75.75v1.016H5.57c-.414 0-.75.336-.75.75s.336.75.75.75H6.6v1.016c0 .414.335.75.75.75s.75-.336.75-.75v-1.016h1.098c.414 0 .75-.336.75-.75s-.336-.75-.75-.75z">
-                        </path>
-                        </g>
-                      </svg>
-                    </a>
-                  </div>
+                  <div class="flex-1 px-4 py-2 mx-2 ">
+                    <div class="my_search" >                  
+                     <form action="{% url "search" %}"  method="GET" class="relative text-gray-300 w-80 p-5">
+                        <button type="submit" class="absolute ml-4 mt-3 mr-4">
+                          <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve" width="512px" height="512px">
+                            <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z"></path>
+                          </svg>
+                        </button>
+                        <input type="search" name="search" placeholder="Search " class=" search-clr h-10 px-10 pr-5 w-full rounded-full text-sm focus:outline-none bg-purple-white shadow rounded border-0">
+                      </form> 
+                    </div>
+                      <div class="star_svg">
+                        <a href="" class=" text-2xl font-medium rounded-full text-white hover:bg-gray-800 hover:text-blue-300 float-right">
+                          <svg class="svg-lg m-2 h-6 w-6" fill="#66FCf1" viewBox="0 0 24 24">
+                            <g>
+                            <path d="M22.772 10.506l-5.618-2.192-2.16-6.5c-.102-.307-.39-.514-.712-.514s-.61.207-.712.513l-2.16 6.5-5.62 2.192c-.287.112-.477.39-.477.7s.19.585.478.698l5.62 2.192 2.16 6.5c.102.306.39.513.712.513s.61-.207.712-.513l2.16-6.5 5.62-2.192c.287-.112.477-.39.477-.7s-.19-.585-.478-.697zm-6.49 2.32c-.208.08-.37.25-.44.46l-1.56 4.695-1.56-4.693c-.07-.21-.23-.38-.438-.462l-4.155-1.62 4.154-1.622c.208-.08.37-.25.44-.462l1.56-4.693 1.56 4.694c.07.212.23.382.438.463l4.155 1.62-4.155 1.622zM6.663 3.812h-1.88V2.05c0-.414-.337-.75-.75-.75s-.75.336-.75.75v1.762H1.5c-.414 0-.75.336-.75.75s.336.75.75.75h1.782v1.762c0 .414.336.75.75.75s.75-.336.75-.75V5.312h1.88c.415 0 .75-.336.75-.75s-.335-.75-.75-.75zm2.535 15.622h-1.1v-1.016c0-.414-.335-.75-.75-.75s-.75.336-.75.75v1.016H5.57c-.414 0-.75.336-.75.75s.336.75.75.75H6.6v1.016c0 .414.335.75.75.75s.75-.336.75-.75v-1.016h1.098c.414 0 .75-.336.75-.75s-.336-.75-.75-.75z">
+                            </path>
+                            </g>
+                          </svg>
+                        </a> 
+                      </div>                   
+                  </div> 
                 </div>
                 <hr class="border-gray-800">
               </aside>
@@ -53,7 +77,7 @@
                             <span class="list text-sm text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
                               @{{ tweet.author.username }}  . 
                               
-                              <span class="option list">{{ tweet.created|timesince }}</span>
+                              <span class=" list">{{ tweet.created|timesince }}</span>
                             </span>
                             </p>
                           </div>
@@ -129,14 +153,52 @@
 {% include "includes/tweet_form.html" %}
 <style>
 
+
+  /* Add CSS for the preloader */
+
+      .preloader {
+
+    position: fixed;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    background-color: #0a1624; /* Set background color if needed */
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    z-index: 9999; /* Make sure it's above other elements */
+
+    }
+
  @media  (max-width: 500px)
     { 
-      
+      body{
+        max-height: 800px;
+      }
       .main {
           flex-direction: column;
           align-items: center; 
       }
-
+      .my_search{
+        display: : block;
+      }
+      .star_svg{
+        display: none;
+      }
+      .search_small{
+        display: block;
+        
+      }
       .tweet {
           max-width: 110%;
           overflow-y: scroll;
@@ -165,6 +227,19 @@
       }
   
     } 
+
+  
+
+  @media (min-width: 401px) {
+    .my_search {
+     display: none;
+    }
+  }
+ 
+
+
+
+
     .head_clr{
       color: #66FCf1
     }
@@ -195,6 +270,32 @@
      
     }
   </style>
+
+<script>
+
+  document.addEventListener("DOMContentLoaded", function() {
+
+      // Add a delay of 1.5 seconds (1500 milliseconds) before hiding the preloader
+
+      setTimeout(function() {
+
+          // Hide the preloader
+
+          document.querySelector('.preloader').style.display = 'none';
+
+     
+
+          // Show the main content
+
+          document.querySelector('.main-content').style.display = 'block';
+
+      }, 1400);
+
+  });
+
+</script>
+
+
   
 
   {% endblock content%}

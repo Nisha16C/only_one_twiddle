@@ -18,6 +18,8 @@
         <div class="header" style=" background-color: #858d89;">
             <div class="avatar-wrapper avatar-big">
                 <!-- Avatar image -->
+                <img src="{% if receiver.profile.avatar %}{{ receiver.profile.avatar.url }}{% else %}{% static 'default-img.png' %}{% endif %}"  style="width: 30px; height: 30px; border-radius: 50%; margin-right: 10px;">
+
             </div>
             <span class="name">{{ receiver.username }}</span>
             <span class="options">
@@ -74,19 +76,19 @@
         </div>
        
         
-          <form method="post" action="{% url 'send_message' receiver.id %}" class="message-form" style="position: sticky; bottom: 0; padding: 12px;" enctype="multipart/form-data">
-            <div class="message-input-container" style="display: flex;">
-                {% csrf_token %}
-                <input class="message-input" style=" background-color: #858d89; flex: 1; margin-right: 10px; margin-left: 10px; border: 1px solid #45a29e; border-radius: 25px; padding: 10px; color: black; font-size: 18px;" name="content" placeholder="Type your message here" required></input>
-                <label class="image-upload-label" for="file-input" style="margin-left: 5px; margin-right: 10px; cursor: pointer;">
-                        <i class="fa fa-image image-icon" style="color: #858d89; font-size: 30px; margin-top: 10px;"></i>
-                        <input id="file-input" type="file" name="image" accept="image/*" style="display: none;">
-                </label>
-                <input class="send-button" type="submit" value="Send" style=" padding: 5px 5px;
-                background-color: #858d89; color: white; border: none; border-radius: 30px; cursor: pointer;
-                 ">
-            </div>
-        </form>
+         
+        <form method="post" action="{% url 'send_message' receiver.id %}" class="message-form" style="position: sticky; bottom: 0; padding: 0px;" enctype="multipart/form-data">
+          <div class="message-input-container" style="display: flex; background-color: #858d89; padding: 12px;">
+            {% csrf_token %}
+            <input class="message-input" style="flex: 1; margin-right: 10px; margin-left: 10px; border: 2px solid #000000; border-radius: 25px; padding: 10px; color: black; font-size: 18px; background-color: white;" name="content" placeholder="Type your message here" required></input>
+            <label class="image-upload-label" for="file-input" style="margin-left: 5px; margin-right: 10px; cursor: pointer;">
+                <i class="fa fa-image image-icon" style="color: #000000; font-size: 30px; margin-top: 10px;"></i>
+                <input id="file-input" type="file" name="image" accept="image/*" style="display: none;">
+            </label>
+            <input class="send-button" type="submit" value="Send" style="padding: 5px 10px; background-color: #000000; color: white; border: none; border-radius: 30px; cursor: pointer;">
+        </div>  
+      </form>
+       
          
         {% else %}
           <p style="text-align: center;">Select a user to start a conversation.</p>
@@ -106,10 +108,11 @@
 /* Colors */
 :root {
   --blue: #2c3531;
-  --light-violet: #fbcffc;
+  --light-violet: #2c3531;
   --violet: #2c3531;
   --gray: #f7f9fb;
 }
+
 
 /* Global styles */
 html,
@@ -146,6 +149,7 @@ i:hover {
 /* Reset default styles for form elements */
 button {
   border: 0;
+
   outline: none;
 }
 
@@ -191,6 +195,11 @@ img {
   cursor: pointer;
 }
 
+.chat-room {
+    flex: 1; /* Allow the chat room to expand and take remaining width */
+}
+
+
 .chat-box .chat-room {
   min-height: 300px;
   background-color: #f7f9fb;
@@ -232,7 +241,8 @@ img {
 }
 
 .chat-box .chat-room .bubble-light {
-  background-color: var(--light-violet);
+  color: #fff;
+  background-color: var(--violet);
 }
 
 .chat-box .chat-room .bubble-dark {
@@ -269,7 +279,7 @@ img {
 
 .chat-box .type-area .button-add i {
   font-size: 30px;
-  color: lightgrey;
+  color: light;
   cursor: pointer;
 }
 

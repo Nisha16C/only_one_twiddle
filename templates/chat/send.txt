@@ -70,13 +70,14 @@
                     </span>
                     </div>
                     {% endif %}
-
           {% endfor %}
-
+        </div>
+       
+        
           <form method="post" action="{% url 'send_message' receiver.id %}" class="message-form" style="position: sticky; bottom: 0; padding: 12px;" enctype="multipart/form-data">
             <div class="message-input-container" style="display: flex;">
                 {% csrf_token %}
-                <input class="message-input" style=" background-color: #858d89; flex: 1; margin-right: 10px; margin-left: 10px; border: 1px solid #000000; border-radius: 25px; padding: 10px; color: black; font-size: 18px;" name="content" placeholder="Type your message here" required></input>
+                <input class="message-input" style=" background-color: #858d89; flex: 1; margin-right: 10px; margin-left: 10px; border: 1px solid #45a29e; border-radius: 25px; padding: 10px; color: black; font-size: 18px;" name="content" placeholder="Type your message here" required></input>
                 <label class="image-upload-label" for="file-input" style="margin-left: 5px; margin-right: 10px; cursor: pointer;">
                         <i class="fa fa-image image-icon" style="color: #858d89; font-size: 30px; margin-top: 10px;"></i>
                         <input id="file-input" type="file" name="image" accept="image/*" style="display: none;">
@@ -86,10 +87,6 @@
                  ">
             </div>
         </form>
-
-        </div>
-       
-        
          
         {% else %}
           <p style="text-align: center;">Select a user to start a conversation.</p>
@@ -149,6 +146,7 @@ i:hover {
 /* Reset default styles for form elements */
 button {
   border: 0;
+
   outline: none;
 }
 

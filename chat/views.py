@@ -8,6 +8,8 @@ from django.shortcuts import get_object_or_404, redirect, render
 from .models import Chat, Message
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count, Q
+
+
 # from django.db.models import Count
 
 # Import the Q object here
@@ -21,6 +23,7 @@ def user_list(request):
 
     # Iterate through each user and get their unread message count to the current user
     for user in users:
+       
         unread_count = Message.objects.filter(sender=user, receiver=current_user, is_read=False).count()
         user.unread_count = unread_count
 
@@ -33,6 +36,7 @@ def user_list(request):
 def send_message(request, user_id):
     receiver = get_object_or_404(User, id=user_id)
     sender = request.user
+    print (receiver.profile.avatar)
 
     chat = Chat.objects.filter(participants=sender).filter(participants=receiver).first()
     if not chat:

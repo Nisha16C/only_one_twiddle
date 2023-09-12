@@ -18,7 +18,7 @@
     <div class="flex justify-center">
         {% include "includes/left_sidebar.html" %}
         <main role="main">
-          <div class="flex" style="width: 990px;">
+          <div class="flex main" style="width: 990px;">
             <section class="w-3/5 border border-y-0 border-gray-800" style="max-width:600px;">
               <!--Content (Center)-->
               <!-- Nav back-->
@@ -211,7 +211,9 @@
               </ul>
 
               </section>
-              {% include "includes/right_sidebar.html" %}
+              <div class="right-sidebar">
+                 {% include "includes/right_sidebar.html" %}
+              </div>             
           </div>
         </main>
     </div>
@@ -220,6 +222,38 @@
 
 {% include "includes/tweet_form.html" %}
 <style>
+ @media  (max-width: 500px)
+    { 
+      
+      .main {
+          flex-direction: column;
+          align-items: center; 
+          margin-left: 200px;
+      }
+
+      .right-sidebar {
+          display: none;
+      }
+      section{
+        max-width: 625px;}
+
+      img{
+        width: 200px;
+        height: 200px;
+      }
+      .text-sm{
+        font-size: 25px;
+      }
+      .text-lg{
+        font-size: 30px
+      }
+      .svg-lg{
+        width: 35px;
+        height: 35px;
+      }
+  
+    } 
+
 
   .btn_follow{
     color: black;
