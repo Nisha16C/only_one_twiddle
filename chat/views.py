@@ -18,16 +18,13 @@ from django.db.models import Count, Q
 def user_list(request):
     current_user = request.user
 
-    # Get all users excluding the current user
     users = User.objects.exclude(id=current_user.id)
 
-    # Iterate through each user and get their unread message count to the current user
     for user in users:
        
         unread_count = Message.objects.filter(sender=user, receiver=current_user, is_read=False).count()
         user.unread_count = unread_count
 
-    # Calculate the total unread messages count from all senders to the current user
     total_unread_count = Message.objects.filter(receiver=current_user, is_read=False).count()
 
     return render(request, 'chat/user_list.html', {'users': users, 'total_unread_count': total_unread_count})

@@ -8,9 +8,24 @@ from chat.models import Chat, Message
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count
 
+
+user_rec = []
+@login_required
+def delete_message_view(request, message_id):
+    message = get_object_or_404(Message, id=message_id)
+    
+    # Check if the logged-in user is the sender or receiver of the message
+    if request.user == message.sender or request.user == message.receiver:
+        message.delete()
+        # return redirect('home')
+        user_id = message.receiver.id if request.user == message.sender else message.sender.id
+        return redirect('send_message', user_id=user_id)
+
+
 @login_required
 def send_message_view(request, user_id):
     receiver = get_object_or_404(User, id=user_id)
+    user_rec.append(receiver)
     sender = request.user
 
     chat = Chat.objects.filter(participants=sender).filter(participants=receiver).first()

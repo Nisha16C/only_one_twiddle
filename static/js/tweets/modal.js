@@ -17,6 +17,7 @@ const retweetForm = document.getElementById('retweet-form');
 const submitretweetBtn = document.getElementById('retweet-submit');
 //-------------------------------------------------------------------
 const deleteBtn = document.getElementById('delete-button');
+const chatDeleteBtn = document.getElementById('delete-chat');
 
 if (mentionForm !== null) {
     const tweetURL = mentionForm.getAttribute('data-tweet');
@@ -148,6 +149,7 @@ likeUnlikeForms.forEach(form => form.addEventListener('submit', function (e) {
     const clickedId = e.target.getAttribute('data-like-id');
     const clickedBtn = document.getElementById(`like-unlike-${clickedId}`);
     const clickedType = e.target.getAttribute('data-type');
+    
 
     $.ajax({
         type: 'POST',
@@ -188,3 +190,5 @@ deleteBtn.addEventListener('click', function (e) {
         }
     })
 })
+
+

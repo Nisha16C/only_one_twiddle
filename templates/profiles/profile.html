@@ -3,7 +3,7 @@
 
 {% block scripts %}
 <script src="{% static "js/profiles/main.js" %}" integrity="sha256-eW+swLsR6Ef8uNr18yyr/gOjoOTC+yCLc6i5ubbg0QQ=" crossorigin="anonymous" defer></script>
-<script src="{% static "js/tweets/modal.js" %}" integrity="sha256-1U5lBtP71qq2HImJIeV7MGf5GqiJvGaMdDzhvn6MFHU=" crossorigin="anonymous" defer></script>
+<script src="{% static "js/tweets/modal.js" %}" integrity="sha256-n3C+i6ySKmBq23xitwiXrqJ8UgQjHyur/4igXWTNXss=" crossorigin="anonymous" defer></script>
 
 {% endblock scripts %}
 
@@ -19,7 +19,7 @@
         {% include "includes/left_sidebar.html" %}
         <main role="main">
           <div class="flex main" style="width: 990px;">
-            <section class="w-3/5 border border-y-0 border-gray-800" style="max-width:600px;">
+            <section class="w-3/5 border border-y-0 border-gray-800 profile_user" style="max-width:600px;">
               <!--Content (Center)-->
               <!-- Nav back-->
               <div>
@@ -228,7 +228,13 @@
       .main {
           flex-direction: column;
           align-items: center; 
-          margin-left: 200px;
+          margin-left: 300px;
+      }
+      .profile_user {
+          max-width: 110%;
+          overflow-y: scroll;
+          max-height: calc(180vh); 
+          margin: 20px 0; 
       }
 
       .right-sidebar {

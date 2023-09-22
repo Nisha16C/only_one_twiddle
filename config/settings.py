@@ -247,14 +247,17 @@ TWILIO_AUTH_TOKEN = 'b36c3bef11f957dc63ec7a7ec4e50e99'
 TWILIO_PHONE_NUMBER = '+12316248749'
 
 
+
+
+# Make sure this setting is set to True to enable HTTPS for session cookies.
 SESSION_COOKIE_SECURE = True
-SESSION_COOKIE_HTTPONLY = True
-
-
 
 # Make sure this setting is set to True to enable HTTPS for CSRF cookies.
 CSRF_COOKIE_SECURE = True
-CSRF_COOKIE_HTTPONLY = True
+
+
+#  Please Never add the below line, this will cause this permission issue to non django csrf form added by ashish
+# CSRF_COOKIE_HTTPONLY = True
 
 # csp rule added by ashish
 
