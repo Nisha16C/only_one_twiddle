@@ -4,27 +4,26 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-    </head>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+</head>
     <body>
- 
     <div class="chat-box" style="width: 700px;">
         <div class="header" style=" background-color: #858d89;">
             <div class="avatar-wrapper avatar-big">
                 <!-- Avatar image -->
                 <img src="{% if receiver.profile.avatar %}{{ receiver.profile.avatar.url }}{% else %}{% static 'default-img.png' %}{% endif %}"  style="width: 30px; height: 30px; border-radius: 50%; margin-right: 10px;">
-
             </div>
             <span class="name">{{ receiver.username }}</span>
             <span class="options">
               <a href="{% url 'home' %}">
-                <i class="fa fa-arrow-left"></i>
+                <i class="fa fa-arrow-left">
+                </i>
               </a>  
             </span>
         </div>
@@ -52,8 +51,8 @@
                         </div>
                           <span class="chat-timestamp" style="font-size: 12px; color: gray; display: block;  text-align: right; padding: 2px; margin-top: 5px;">
                                 {{ message.timestamp }}
-                                <a  href="{% url 'delete_message' message_id=message.id %}">                                  
-                                  <button type="submit" class="fa fa-trash" style="background-color: gray;"></button>
+                                <a href="#" data-message-id="{{ message.id }}" onclick="confirmDelete(this);">
+                                                                   <button type="submit" class="fa fa-trash" style="background-color: gray;"></button>
                                 </a>                        
                           </span>
                          
@@ -80,10 +79,7 @@
                     </div>
                     {% endif %}
           {% endfor %}
-        </div>
-       
-        
-         
+        </div>         
         <form method="post" action="{% url 'send_message' receiver.id %}" class="message-form" style="position: sticky; bottom: 0; padding: 0px;" enctype="multipart/form-data">
           <div class="message-input-container" style="display: flex; background-color: #858d89; padding: 12px;">
             {% csrf_token %}
@@ -94,20 +90,30 @@
             </label>
             <input class="send-button" type="submit" value="Send" style="padding: 5px 10px; background-color: #000000; color: white; border: none; border-radius: 30px; cursor: pointer;">
         </div>  
-      </form>
-       
-         
+      </form>       
         {% else %}
           <p style="text-align: center;">Select a user to start a conversation.</p>
-        {% endif %}
-    
-   
-         
+        {% endif %}       
   </body>
+  <script>
+    function confirmDelete(element) {
+      var messageId = element.getAttribute('data-message-id');
+      
+      var deleteUrl = `/c_msg/delete_message/${messageId}/`;
+    
+      if (confirm("Are you sure you want to delete message?")) {
+        window.location.href = deleteUrl;
+      } else {
+      }
+    }
+    </script>
+    
+    
+    
   </html>                    
   <script src="https://kit.fontawesome.com/faa629c1cc.js"  crossorigin="anonymous"></script>
   <!-- Jquery -->
-  <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>  </body>
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>  
 
 
 
